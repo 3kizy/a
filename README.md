@@ -420,7 +420,7 @@ function Library:create(options)
 		Name = "MPS HUB",
 		Size = UDim2.fromOffset(600, 400),
 		Theme = self.Themes[settings.Theme],
-		Link = "https://github.com/deeeity/mercury-lib"
+		Link = "made by rus and teox"
 	}, options)
 
 	if getgenv and getgenv().MercuryUI then
