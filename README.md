@@ -813,7 +813,7 @@ function Library:create(options)
 		Size = UDim2.fromOffset(24, 24),
 		Position = UDim2.new(1, -10, 1, -10),
 		AnchorPoint = Vector2.new(1, 1),
-		Image = "http://www.roblox.com/asset/?id=8559790237"
+		Image = "http://www.roblox.com/asset/?id=10862353321"
 	}):tooltip("settings")
 
 	local creditsTabIcon = profile:object("ImageButton", {
@@ -822,7 +822,7 @@ function Library:create(options)
 		Size = UDim2.fromOffset(24, 24),
 		Position = UDim2.new(1, -44, 1, -10),
 		AnchorPoint = Vector2.new(1, 1),
-		Image = "http://www.roblox.com/asset/?id=8577523456"
+		Image = "http://www.roblox.com/asset/?id=10862353321"
 	}):tooltip("credits")
 
 	local quickAccess = homePage:object("Frame", {
@@ -862,7 +862,7 @@ function Library:create(options)
 	local settingsTab = Library.tab(mt, {
 		Name = "Settings",
 		Internal = settingsTabIcon,
-		Icon = "rbxassetid://8559790237"
+		Icon = "rbxassetid://10862353321"
 	})
 
 	settingsTab:_theme_selector()
@@ -870,27 +870,19 @@ function Library:create(options)
 	settingsTab:keybind{
 		Name = "Toggle Key",
 		Description = "Key to show/hide the UI.",
-		Keybind = Enum.KeyCode.Delete,
+		Keybind = Enum.KeyCode.P,
 		Callback = function()
 			self.Toggled = not self.Toggled
 			Library:show(self.Toggled)
 		end,
 	}
 
-	settingsTab:toggle{
-		Name = "Lock Dragging",
-		Description = "Makes sure you can't drag the UI outside of the window.",
-		StartingState = true,
-		Callback = function(state)
-			Library.LockDragging = state
-		end,
-	}
 
 	settingsTab:slider{
 		Name = "UI Drag Speed",
 		Description = "How smooth the dragging looks.",
 		Max = 20,
-		Default = 14,
+		Default = 10,
 		Callback = function(value)
 			Library.DragSpeed = (20 - value)/100
 		end,
