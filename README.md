@@ -1,3517 +1,1195 @@
---[[
+-- Gui to Lua
+-- Version: 3.2
 
-edited: 1/26
-developers:
-xuhinii#7269
+-- Instances:
 
-]]
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local UICorner = Instance.new("UICorner")
+local Main = Instance.new("Frame")
+local UICorner_2 = Instance.new("UICorner")
+local TextButton = Instance.new("TextButton")
+local UICorner_3 = Instance.new("UICorner")
+local TextButton_2 = Instance.new("TextButton")
+local UICorner_4 = Instance.new("UICorner")
+local TextButton_3 = Instance.new("TextButton")
+local UICorner_5 = Instance.new("UICorner")
+local TextButton_4 = Instance.new("TextButton")
+local UICorner_6 = Instance.new("UICorner")
+local TextButton_5 = Instance.new("TextButton")
+local UICorner_7 = Instance.new("UICorner")
+local TextButton_6 = Instance.new("TextButton")
+local UICorner_8 = Instance.new("UICorner")
+local TextButton_7 = Instance.new("TextButton")
+local UICorner_9 = Instance.new("UICorner")
+local TextButton_8 = Instance.new("TextButton")
+local UICorner_10 = Instance.new("UICorner")
+local TextButton_9 = Instance.new("TextButton")
+local UICorner_11 = Instance.new("UICorner")
+local TextButton_10 = Instance.new("TextButton")
+local UICorner_12 = Instance.new("UICorner")
+local TextButton_11 = Instance.new("TextButton")
+local UICorner_13 = Instance.new("UICorner")
+local TextButton_12 = Instance.new("TextButton")
+local UICorner_14 = Instance.new("UICorner")
+local TextButton_13 = Instance.new("TextButton")
+local UICorner_15 = Instance.new("UICorner")
+local TextButton_14 = Instance.new("TextButton")
+local UICorner_16 = Instance.new("UICorner")
+local Frame_2 = Instance.new("Frame")
+local UICorner_17 = Instance.new("UICorner")
+local TextButton_15 = Instance.new("TextButton")
+local UICorner_18 = Instance.new("UICorner")
+local TextButton_16 = Instance.new("TextButton")
+local UICorner_19 = Instance.new("UICorner")
+local TextButton_17 = Instance.new("TextButton")
+local UICorner_20 = Instance.new("UICorner")
+local shadowHolder = Instance.new("Frame")
+local umbraShadow = Instance.new("ImageLabel")
+local penumbraShadow = Instance.new("ImageLabel")
+local ambientShadow = Instance.new("ImageLabel")
+local TextLabel = Instance.new("TextLabel")
+local Credits = Instance.new("Frame")
+local UICorner_21 = Instance.new("UICorner")
+local TextButton_18 = Instance.new("TextButton")
+local UICorner_22 = Instance.new("UICorner")
+local TextButton_19 = Instance.new("TextButton")
+local UICorner_23 = Instance.new("UICorner")
+local TextButton_20 = Instance.new("TextButton")
+local UICorner_24 = Instance.new("UICorner")
+local TextButton_21 = Instance.new("TextButton")
+local UICorner_25 = Instance.new("UICorner")
+local TextButton_22 = Instance.new("TextButton")
+local UICorner_26 = Instance.new("UICorner")
+local TextButton_23 = Instance.new("TextButton")
+local UICorner_27 = Instance.new("UICorner")
+local Information = Instance.new("Frame")
+local UICorner_28 = Instance.new("UICorner")
+local TextButton_24 = Instance.new("TextButton")
+local UICorner_29 = Instance.new("UICorner")
+local TextButton_25 = Instance.new("TextButton")
+local UICorner_30 = Instance.new("UICorner")
+local TextButton_26 = Instance.new("TextButton")
+local UICorner_31 = Instance.new("UICorner")
+local TextButton_27 = Instance.new("TextButton")
+local UICorner_32 = Instance.new("UICorner")
+local TextButton_28 = Instance.new("TextButton")
+local UICorner_33 = Instance.new("UICorner")
+local TextButton_29 = Instance.new("TextButton")
+local UICorner_34 = Instance.new("UICorner")
+local TextLabel_2 = Instance.new("TextLabel")
+local TextLabel_3 = Instance.new("TextLabel")
+local UICorner_35 = Instance.new("UICorner")
+local TextLabel_4 = Instance.new("TextLabel")
+local TextLabel_5 = Instance.new("TextLabel")
+local UICorner_36 = Instance.new("UICorner")
 
-local TweenService = game:GetService("TweenService")
-local RunService = game:GetService("RunService")
-local UserInputService = game:GetService("UserInputService")
-local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
-local Mouse = LocalPlayer:GetMouse()
-local HTTPService = game:GetService("HttpService")
+--Properties:
 
-local Library = {
-	Themes = {
-		Legacy = {
-			Main = Color3.fromHSV(262/360, 60/255, 34/255),
-			Secondary = Color3.fromHSV(240/360, 40/255, 63/255),
-			Tertiary = Color3.fromHSV(260/360, 60/255, 148/255),
+ScreenGui.Parent = game.CoreGui
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Global
 
-			StrongText = Color3.fromHSV(0, 0, 1),		
-			WeakText = Color3.fromHSV(0, 0, 172/255)
-		},
-		Serika = {
-			Main = Color3.fromRGB(50, 52, 55),
-			Secondary = Color3.fromRGB(80, 82, 85),
-			Tertiary = Color3.fromRGB(226, 183, 20),
-
-			StrongText = Color3.fromHSV(0, 0, 1),		
-			WeakText = Color3.fromHSV(0, 0, 172/255)
-		},
-		Dark = {
-			Main = Color3.fromRGB(30, 30, 35),
-			Secondary = Color3.fromRGB(50, 50, 55),
-			Tertiary = Color3.fromRGB(70, 130, 180),
-
-			StrongText = Color3.fromHSV(0, 0, 1),		
-			WeakText = Color3.fromHSV(0, 0, 172/255)
-		},
-		Rust = {
-			Main = Color3.fromRGB(37, 35, 33),
-			Secondary = Color3.fromRGB(65, 63, 63),
-			Tertiary = Color3.fromRGB(237, 94, 38),
-
-			StrongText = Color3.fromHSV(0, 0, 1),		
-			WeakText = Color3.fromHSV(0, 0, 172/255)
-		},
-		Aqua = {
-			Main = Color3.fromRGB(19, 21, 21),
-			Secondary = Color3.fromRGB(65, 63, 63),
-			Tertiary = Color3.fromRGB(51, 153, 137),
-
-			StrongText = Color3.fromHSV(0, 0, 1),        
-			WeakText = Color3.fromHSV(0, 0, 172/255)
-		},
-		Vaporwave = {},
-		OperaGX = {},
-		VisualStudio = {}
-	},
-	ColorPickerStyles = {
-		Legacy = 0,
-		Modern = 1
-	},
-	Toggled = true,
-	ThemeObjects = {
-		Main = {},
-		Secondary = {},
-		Tertiary = {},
-
-		StrongText = {},
-		WeakText = {}
-	},
-	WelcomeText = nil,
-	DisplayName = nil,
-	DragSpeed = 0.06,
-	LockDragging = false,
-	ToggleKey = Enum.KeyCode.Home,
-	UrlLabel = nil,
-	Url = nil
-
-}
-Library.__index = Library
-
-local selectedTab
-
-Library._promptExists = false
-Library._colorPickerExists = false
-
-local GlobalTweenInfo = TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut)
-
-function Library:set_defaults(defaults, options)
-	defaults = defaults or {}
-	options = options or {}
-	for option, value in next, options do
-		defaults[option] = value
-	end
-	return defaults
-end
-
-function Library:change_theme(toTheme)
-	Library.CurrentTheme = toTheme
-	local c = self:lighten(toTheme.Tertiary, 20)
-	Library.DisplayName.Text = "Welcome, <font color='rgb(" ..  math.floor(c.R*255) .. "," .. math.floor(c.G*255) .. "," .. math.floor(c.B*255) .. ")'> <b>" .. LocalPlayer.DisplayName .. "</b> </font>"
-	for color, objects in next, Library.ThemeObjects do
-		local themeColor = Library.CurrentTheme[color]
-		for _, obj in next, objects do
-			local element, property, theme, colorAlter = obj[1], obj[2], obj[3], obj[4] or 0
-			local themeColor = Library.CurrentTheme[theme]
-			local modifiedColor = themeColor
-			if colorAlter < 0 then
-				modifiedColor = Library:darken(themeColor, -1 * colorAlter)
-			elseif colorAlter > 0 then
-				modifiedColor = Library:lighten(themeColor, colorAlter)
-			end
-			element:tween{[property] = modifiedColor}
-		end
-	end
-end
-
-function Library:object(class, properties)
-	local localObject = Instance.new(class)
-
-	local forcedProps = {
-		BorderSizePixel = 0,
-		AutoButtonColor = false,
-		Font = Enum.Font.SourceSans,
-		Text = ""
-	}
-
-	for property, value in next, forcedProps do
-		pcall(function()
-			localObject[property] = value
-		end)
-	end
-
-	local methods = {}
-
-	methods.AbsoluteObject = localObject
-
-	function methods:tween(options, callback)
-		local options = Library:set_defaults({
-			Length = 0.2,
-			Style = Enum.EasingStyle.Linear,
-			Direction = Enum.EasingDirection.InOut
-		}, options)
-		callback = callback or function() return end
+Frame.Parent = ScreenGui
 
 
-		local ti = TweenInfo.new(options.Length, options.Style, options.Direction)
-		options.Length = nil
-		options.Style = nil 
-		options.Direction = nil
+UICorner.CornerRadius = UDim.new(0, 3)
+UICorner.Parent = Frame
 
-		local tween = TweenService:Create(localObject, ti, options); tween:Play()
+Main.Name = "Main"
+Main.Parent = Frame
+Main.BackgroundColor3 = Color3.fromRGB(1000, 36, 36)
+Main.Position = UDim2.new(0.00142349559, 0, 0.274297148, 0)
+Main.Size = UDim2.new(0, 0, 0, 0)
 
-		tween.Completed:Connect(function()
-			callback()
-		end)
+UICorner_2.CornerRadius = UDim.new(0, 3)
+UICorner_2.Parent = Main
 
-		return tween
-	end
+TextButton.Parent = Main
+TextButton.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+TextButton.Position = UDim2.new(0, 800, 50, 70)
+TextButton.Size = UDim2.new(0, 213, 0, 70)
+TextButton.Font = Enum.Font.GothamBlack
+TextButton.Text = "4-A-SIDE BIGFOOT"
+TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.TextSize = 20.000
 
-	function methods:round(radius)
-		radius = radius or 6
-		Library:object("UICorner", {
-			Parent = localObject,
-			CornerRadius = UDim.new(0, radius)
-		})
-		return methods
-	end
+UICorner_3.Parent = TextButton
 
-	function methods:object(class, properties)
-		local properties = properties or {}
-		properties.Parent = localObject
-		return Library:object(class, properties)
-	end
 
-	function methods:crossfade(p2, length)
-		length = length or .2
-		self:tween({ImageTransparency = 1})
-		p2:tween({ImageTransparency = 0})
-	end
 
-	function methods:fade(state, colorOverride, length, instant)
-		length = length or 0.2
-		if not rawget(self, "fadeFrame") then
-			local frame = self:object("Frame", {
-				BackgroundColor3 = colorOverride or self.BackgroundColor3,
-				BackgroundTransparency = (state and 1) or 0,
-				Size = UDim2.fromScale(1, 1),
-				Centered = true,
-				ZIndex = 999
-			}):round(self.AbsoluteObject:FindFirstChildOfClass("UICorner") and self.AbsoluteObject:FindFirstChildOfClass("UICorner").CornerRadius.Offset or 0)
-			rawset(self, "fadeFrame", frame)
-		else
-			self.fadeFrame.BackgroundColor3 = colorOverride or self.BackgroundColor3
-		end
+TextButton_17.Parent = Frame_2
+TextButton_17.BackgroundColor3 = Color3.fromRGB(43, 43, 43)
+TextButton_17.Position = UDim2.new(0.1593981631, 0, 0.30107972, 0)
+TextButton_17.Size = UDim2.new(0, 103, 0, 38)
+TextButton_17.Font = Enum.Font.GothamBlack
+TextButton_17.Text = "Information"
+TextButton_17.TextColor3 = Color3.fromRGB(200, 255, 255)
+TextButton_17.TextSize = 20.000
 
-		if instant then
-			if state then
-				self.fadeFrame.BackgroundTransparency = 0
-				self.fadeFrame.Visible = true
-			else
-				self.fadeFrame.BackgroundTransparency = 1
-				self.fadeFrame.Visible = false
-			end
-		else
-			if state then
-				self.fadeFrame.BackgroundTransparency = 1
-				self.fadeFrame.Visible = true
-				self.fadeFrame:tween{BackgroundTransparency = 0, Length = length}
-			else
-				self.fadeFrame.BackgroundTransparency = 0
-				self.fadeFrame:tween({BackgroundTransparency = 1, Length = length}, function()
-					self.fadeFrame.Visible = false
-				end)
-			end
-		end	
-	end
+UICorner_20.CornerRadius = UDim.new(0, 3)
+UICorner_20.Parent = TextButton_17
 
-	function methods:stroke(color, thickness, strokeMode)
+shadowHolder.Name = "shadowHolder"
+shadowHolder.Parent = Frame
+shadowHolder.BackgroundTransparency = 0.500
+shadowHolder.Size = UDim2.new(1, 0, 0.409638554, 0)
+shadowHolder.ZIndex = 5
 
-		thickness = thickness or 1
-		strokeMode = strokeMode or Enum.ApplyStrokeMode.Border
-		local stroke = self:object("UIStroke", {
-			ApplyStrokeMode = strokeMode,
-			Thickness = thickness
-		})
+umbraShadow.Name = "umbraShadow"
+umbraShadow.Parent = shadowHolder
+umbraShadow.AnchorPoint = Vector2.new(0.5, 0.5)
+umbraShadow.BackgroundTransparency = 1.000
+umbraShadow.Position = UDim2.new(0.5, 0, 0.5, 3)
+umbraShadow.Size = UDim2.new(1, 1, 1, 3)
+umbraShadow.Image = "rbxassetid://1316045217"
+umbraShadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
+umbraShadow.ImageTransparency = 0.160
+umbraShadow.ScaleType = Enum.ScaleType.Slice
+umbraShadow.SliceCenter = Rect.new(10, 10, 118, 118)
 
-		if type(color) == "table" then
-			local theme, colorAlter = color[1], color[2] or 0
-			local themeColor = Library.CurrentTheme[theme]
-			local modifiedColor = themeColor
-			if colorAlter < 0 then
-				modifiedColor = Library:darken(themeColor, -1 * colorAlter)
-			elseif colorAlter > 0 then
-				modifiedColor = Library:lighten(themeColor, colorAlter)
-			end
-			stroke.Color = modifiedColor
-			table.insert(Library.ThemeObjects[theme], {stroke, "Color", theme, colorAlter})
-		elseif type(color) == "string" then
-			local themeColor = Library.CurrentTheme[color]
-			stroke.Color = themeColor
-			table.insert(Library.ThemeObjects[color], {stroke, "Color", color, 0})
-		else
-			stroke.Color = color
-		end
+penumbraShadow.Name = "penumbraShadow"
+penumbraShadow.Parent = shadowHolder
+penumbraShadow.AnchorPoint = Vector2.new(0.5, 0.5)
+penumbraShadow.BackgroundTransparency = 1.000
+penumbraShadow.Position = UDim2.new(0.5, 0, 0.5, 3)
+penumbraShadow.Size = UDim2.new(1, 1, 1, 3)
+penumbraShadow.Image = "rbxassetid://1316045217"
+penumbraShadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
+penumbraShadow.ImageTransparency = 0.880
+penumbraShadow.ScaleType = Enum.ScaleType.Slice
+penumbraShadow.SliceCenter = Rect.new(10, 10, 118, 118)
 
-		return methods
-	end
+ambientShadow.Name = "ambientShadow"
+ambientShadow.Parent = shadowHolder
+ambientShadow.AnchorPoint = Vector2.new(0.5, 0.5)
+ambientShadow.BackgroundTransparency = 1.000
+ambientShadow.Position = UDim2.new(0.501123726, 0, 0.474999994, 3)
+ambientShadow.Size = UDim2.new(0.991011322, 3, 1.04999995, 3)
+ambientShadow.Image = "rbxassetid://1316045217"
+ambientShadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
+ambientShadow.ImageTransparency = 0.880
+ambientShadow.ScaleType = Enum.ScaleType.Slice
+ambientShadow.SliceCenter = Rect.new(10, 10, 118, 118)
 
-	function methods:tooltip(text)
-		local tooltipContainer = methods:object("TextLabel", {
-			Theme = {
-				BackgroundColor3 = {"Main", 10},
-				TextColor3 = {"WeakText"}
-			},
-			TextSize = 16,
-			Text = text,
-			Position = UDim2.new(0.5, 0, 0, -8),
-			TextXAlignment = Enum.TextXAlignment.Center,
-			TextYAlignment = Enum.TextYAlignment.Center,
-			AnchorPoint = Vector2.new(0.5, 1),
-			BackgroundTransparency = 1,
-			TextTransparency = 1
-		}):round(5)
-		tooltipContainer.Size = UDim2.fromOffset(tooltipContainer.TextBounds.X + 16, tooltipContainer.TextBounds.Y + 8)
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(-0.0267857146, 0, 0, 0)
+TextLabel.Size = UDim2.new(0, 94, 0, 23)
+TextLabel.Font = Enum.Font.GothamBold
+TextLabel.Text = ""
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextSize = 25.000
 
-		local tooltipArrow = tooltipContainer:object("ImageLabel", {
-			Image = "http://www.roblox.com/asset/?id=4292970642",
-			Theme = {ImageColor3 = {"Main", 10}},
-			AnchorPoint = Vector2.new(0.5, 0),
-			Rotation = 180,
-			Position = UDim2.fromScale(0.5, 1),
-			Size = UDim2.fromOffset(10, 6),
-			BackgroundTransparency = 1,
-			ImageTransparency = 1
-		})
+Credits.Name = "Credits"
+Credits.Parent = Frame
+Credits.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
+Credits.Position = UDim2.new(0, 0, 0.277108431, 0)
+Credits.Size = UDim2.new(0, 543, 0, 372)
+Credits.Visible = false
 
-		local hovered = false
+UICorner_21.CornerRadius = UDim.new(0, 3)
+UICorner_21.Parent = Credits
 
-		methods.MouseEnter:connect(function()
-			hovered = true
-			wait(0.2)
-			if hovered then
-				tooltipContainer:tween{BackgroundTransparency = 0.2, TextTransparency = 0.2}
-				tooltipArrow:tween{ImageTransparency = 0.2}
-			end
-		end)
+TextButton_18.Parent = Credits
+TextButton_18.BackgroundColor3 = Color3.fromRGB(43, 43, 43)
+TextButton_18.Position = UDim2.new(0.259970695, 0, 0.0569556877, 0)
+TextButton_18.Size = UDim2.new(0, 381, 0, 38)
+TextButton_18.Font = Enum.Font.GothamBlack
+TextButton_18.Text = "Main dev: David De Gea#4581"
+TextButton_18.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton_18.TextSize = 14.000
 
-		methods.MouseLeave:connect(function()
-			hovered = false
-			tooltipContainer:tween{BackgroundTransparency = 1, TextTransparency = 1}
-			tooltipArrow:tween{ImageTransparency = 1}
-		end)
+UICorner_22.Parent = TextButton_18
 
-		return methods
-	end
+TextButton_19.Parent = Credits
+TextButton_19.BackgroundColor3 = Color3.fromRGB(43, 43, 43)
+TextButton_19.Position = UDim2.new(0.259970695, 0, 0.193665951, 0)
+TextButton_19.Size = UDim2.new(0, 381, 0, 38)
+TextButton_19.Font = Enum.Font.GothamBlack
+TextButton_19.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton_19.TextSize = 14.000
 
-	local customHandlers = {
-		Centered = function(value)
-			if value then
-				localObject.AnchorPoint = Vector2.new(0.5, 0.5)
-				localObject.Position = UDim2.fromScale(0.5, 0.5)
-			end	
-		end,
-		Theme = function(value)
-			for property, obj in next, value do
-				if type(obj) == "table" then
-					local theme, colorAlter = obj[1], obj[2] or 0
-					local themeColor = Library.CurrentTheme[theme]
-					local modifiedColor = themeColor
-					if colorAlter < 0 then
-						modifiedColor = Library:darken(themeColor, -1 * colorAlter)
-					elseif colorAlter > 0 then
-						modifiedColor = Library:lighten(themeColor, colorAlter)
-					end
-					localObject[property] = modifiedColor
-					table.insert(self.ThemeObjects[theme], {methods, property, theme, colorAlter})
-				else
-					local themeColor = Library.CurrentTheme[obj]
-					localObject[property] = themeColor
-					table.insert(self.ThemeObjects[obj], {methods, property, obj, 0})
-				end
-			end
-		end,
-	}
+UICorner_23.Parent = TextButton_19
 
-	for property, value in next, properties do
-		if customHandlers[property] then
-			customHandlers[property](value)
-		else
-			localObject[property] = value
-		end
-	end
+TextButton_20.Parent = Credits
+TextButton_20.BackgroundColor3 = Color3.fromRGB(43, 43, 43)
+TextButton_20.Position = UDim2.new(0.260420144, 0, 0.479643464, 0)
+TextButton_20.Size = UDim2.new(0, 380, 0, 38)
+TextButton_20.Font = Enum.Font.GothamBlack
+TextButton_20.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton_20.TextSize = 10.000
 
-	return setmetatable(methods, {
-		__index = function(_, property)
-			return localObject[property]
-		end,
-		__newindex = function(_, property, value)
-			localObject[property] = value
-		end,
-	})
-end
+UICorner_24.Parent = TextButton_20
 
-function Library:show(state)
-	self.Toggled = state
-	self.mainFrame.ClipsDescendants = true
-	if state then
-		self.mainFrame:tween({Size = self.mainFrame.oldSize, Length = 0.25}, function()
-			rawset(self.mainFrame, "oldSize", (state and self.mainFrame.oldSize) or self.mainFrame.Size)
-			self.mainFrame.ClipsDescendants = false
-		end)
-		wait(0.15)
-		self.mainFrame:fade(not state, self.mainFrame.BackgroundColor3, 0.15)
-	else		
-		self.mainFrame:fade(not state, self.mainFrame.BackgroundColor3, 0.15)
-		wait(0.1)
-		self.mainFrame:tween{Size = UDim2.new(), Length = 0.25}
-	end
-end
+TextButton_21.Parent = Credits
+TextButton_21.BackgroundColor3 = Color3.fromRGB(43, 43, 43)
+TextButton_21.Position = UDim2.new(0.258578479, 0, 0.33613947, 0)
+TextButton_21.Size = UDim2.new(0, 381, 0, 38)
+TextButton_21.Font = Enum.Font.GothamBlack
+TextButton_21.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton_21.TextSize = 14.000
 
-function Library:darken(color, f)
-	local h, s, v = Color3.toHSV(color)
-	f = 1 - ((f or 15) / 80)
-	return Color3.fromHSV(h, math.clamp(s/f, 0, 1), math.clamp(v*f, 0, 1))
-end
+UICorner_25.Parent = TextButton_21
 
-function Library:lighten(color, f)
-	local h, s, v = Color3.toHSV(color)
-	f = 1 - ((f or 15) / 80)
-	return Color3.fromHSV(h, math.clamp(s*f, 0, 1), math.clamp(v/f, 0, 1))
-end
+TextButton_22.Parent = Credits
+TextButton_22.BackgroundColor3 = Color3.fromRGB(43, 43, 43)
+TextButton_22.Position = UDim2.new(0.260420144, 0, 0.612421036, 0)
+TextButton_22.Size = UDim2.new(0, 380, 0, 38)
+TextButton_22.Font = Enum.Font.GothamBlack
+TextButton_22.Text = "Join our discord! discord.gg/rj8PXHXmUe"
+TextButton_22.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton_22.TextSize = 10.000
 
---[[ old lighten/darken functions, may revert if contrast gets fucked up
+UICorner_26.Parent = TextButton_22
 
-	function Library:darken(color, f)
-		local h, s, v = Color3.toHSV(color)
-		f = f or 15
-		return Color3.fromHSV(h, s, math.clamp(v - (f/255), 0, 1))
-	end
+TextButton_23.Parent = Credits
+TextButton_23.BackgroundColor3 = Color3.fromRGB(43, 43, 43)
+TextButton_23.Position = UDim2.new(0.260420144, 0, 0.739835024, 0)
+TextButton_23.Size = UDim2.new(0, 378, 0, 38)
+TextButton_23.Font = Enum.Font.GothamBlack
+TextButton_23.Text = "Copy Discord Link"
+TextButton_23.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton_23.TextSize = 14.000
 
-	function Library:lighten(color, f)
-		local h, s, v = Color3.toHSV(color)
-		f = f or 15
-		return Color3.fromHSV(h, s, math.clamp(v + (f/255), 0, 1))
-	end
+UICorner_27.Parent = TextButton_23
+
+Information.Name = "Information"
+Information.Parent = Frame
+Information.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
+Information.Position = UDim2.new(0, 0, 0.277108431, 0)
+Information.Size = UDim2.new(0, 542, 0, 371)
+Information.Visible = false
+
+UICorner_28.CornerRadius = UDim.new(0, 3)
+UICorner_28.Parent = Information
+
+TextButton_24.Parent = Information
+TextButton_24.BackgroundColor3 = Color3.fromRGB(43, 43, 43)
+TextButton_24.Position = UDim2.new(0.278182626, 0, 0.0569701903, 0)
+TextButton_24.Size = UDim2.new(0, 379, 0, 38)
+TextButton_24.Font = Enum.Font.GothamBlack
+TextButton_24.Text = "Press F for AC"
+TextButton_24.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton_24.TextSize = 14.000
+
+UICorner_29.Parent = TextButton_24
+
+TextButton_25.Parent = Information
+TextButton_25.BackgroundColor3 = Color3.fromRGB(43, 43, 43)
+TextButton_25.Position = UDim2.new(0.278182626, 0, 0.190948814, 0)
+TextButton_25.Size = UDim2.new(0, 379, 0, 38)
+TextButton_25.Font = Enum.Font.GothamBlack
+TextButton_25.Text = "Scripting Group: Avexcital Scripts"
+TextButton_25.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton_25.TextSize = 14.000
+
+
+UICorner_31.Parent = TextButton_26
+
+TextButton_27.Parent = Information
+TextButton_27.BackgroundColor3 = Color3.fromRGB(43, 43, 43)
+TextButton_27.Position = UDim2.new(0.278182626, 0, 0.333371639, 0)
+TextButton_27.Size = UDim2.new(0, 379, 0, 38)
+TextButton_27.Font = Enum.Font.GothamBlack
+TextButton_27.Text = "Comma (,) to close the GUI"
+TextButton_27.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton_27.TextSize = 14.000
+
+
+
+UICorner_34.Parent = TextButton_29
+
+TextLabel_2.Parent = Frame
+TextLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.BackgroundTransparency = 1.000
+TextLabel_2.BorderSizePixel = 0
+TextLabel_2.Position = UDim2.new(-0.0267857146, 0, 0, 0)
+TextLabel_2.Size = UDim2.new(0, 94, 0, 23)
+TextLabel_2.Font = Enum.Font.GothamBold
+TextLabel_2.Text = ""
+TextLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.TextSize = 25.000
+
+
+
+
+
+-- Scripts:
+
+local function EBAYR_fake_script() -- TextButton.LocalScript 
+	local script = Instance.new('LocalScript', TextButton)
+
+	local button = script.Parent
+	local ts = game:GetService("TweenService")
+	local ti = TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.In) --you can set that to anything you want
+	local tIn = {BackgroundColor3 = Color3.fromRGB(255, 255, 255), TextColor3 = Color3.fromRGB(43, 43, 43)} --colors are up to you
+	local tOut = {BackgroundColor3 = Color3.fromRGB(43, 43, 43), TextColor3 = Color3.fromRGB(255, 255, 255)} --colors are up to you
+	local createIn = ts:Create(button, ti, tIn) --when mouse ENTERS button
+	local createOut = ts:Create(button, ti, tOut) --when mouse LEAVES button
 	
-]]
-
-local updateSettings = function() end
-
-function Library:set_status(txt)
-	self.statusText.Text = txt
-end
-
-function Library:create(options)
-
-	local settings = {
-		Theme = "Dark"
-	}
-
-	if readfile and writefile and isfile then
-		if not isfile("MercurySettings.json") then
-			writefile("MercurySettings.json", HTTPService:JSONEncode(settings))
-		end
-		settings = HTTPService:JSONDecode(readfile("MercurySettings.json"))
-		Library.CurrentTheme = Library.Themes[settings.Theme]
-		updateSettings = function(property, value)
-			settings[property] = value
-			writefile("MercurySettings.json", HTTPService:JSONEncode(settings))
-		end
-	end
-
-	options = self:set_defaults({
-		Name = "MPS HUB",
-		Size = UDim2.fromOffset(600, 400),
-		Theme = self.Themes[settings.Theme],
-		Link = "made by rus and teox"
-	}, options)
-
-	if getgenv and getgenv().MercuryUI then
-		getgenv():MercuryUI()
-		getgenv().MercuryUI = nil
-	end
-
-
-
-	if options.Link:sub(-1, -1) == "/" then
-		options.Link = options.Link:sub(1, -2)
-	end
-
-	if options.Theme.Light then
-		self.darken, self.lighten = self.lighten, self.darken
-	end
-
-	self.CurrentTheme = options.Theme
-
-	local gui = self:object("ScreenGui", {
-		Parent = (RunService:IsStudio() and LocalPlayer.PlayerGui) or game:GetService("CoreGui"),
-		ZIndexBehavior = Enum.ZIndexBehavior.Global
-	})
-
-	local notificationHolder = gui:object("Frame", {
-		AnchorPoint = Vector2.new(1, 1),
-		BackgroundTransparency = 1,
-		Position = UDim2.new(1, -30,1, -30),
-		Size = UDim2.new(0, 300, 1, -60)
-	})
-
-	local _notiHolderList = notificationHolder:object("UIListLayout", {
-		Padding = UDim.new(0, 20),
-		VerticalAlignment = Enum.VerticalAlignment.Bottom
-	})
-
-	local core = gui:object("Frame", {
-		Size = UDim2.new(),
-		Theme = {BackgroundColor3 = "Main"},
-		Centered = true,
-		ClipsDescendants = true		
-	}):round(10)
-
-	core:fade(true, nil, 0.2, true)
-
-
-	core:fade(false, nil, 0.4)
-	core:tween({Size = options.Size, Length = 0.3}, function()
-		core.ClipsDescendants = false
+	button.MouseEnter:Connect(function()
+	
+		createIn:Play()
+	
 	end)
-
-	do
-		local S, Event = pcall(function()
-			return core.MouseEnter
-		end)
-
-		if S then
-			core.Active = true;
-
-			Event:connect(function()
-				local Input = core.InputBegan:connect(function(Key)
-					if Key.UserInputType == Enum.UserInputType.MouseButton1 then
-						local ObjectPosition = Vector2.new(Mouse.X - core.AbsolutePosition.X, Mouse.Y - core.AbsolutePosition.Y)
-						while RunService.RenderStepped:wait() and UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
-
-							if Library.LockDragging then
-								local FrameX, FrameY = math.clamp(Mouse.X - ObjectPosition.X, 0, gui.AbsoluteSize.X - core.AbsoluteSize.X), math.clamp(Mouse.Y - ObjectPosition.Y, 0, gui.AbsoluteSize.Y - core.AbsoluteSize.Y)
-								core:tween{
-									Position = UDim2.fromOffset(FrameX + (core.Size.X.Offset * core.AnchorPoint.X), FrameY + (core.Size.Y.Offset * core.AnchorPoint.Y)),
-									Length = Library.DragSpeed
-								}
-							else
-								core:tween{
-									Position = UDim2.fromOffset(Mouse.X - ObjectPosition.X + (core.Size.X.Offset * core.AnchorPoint.X), Mouse.Y - ObjectPosition.Y + (core.Size.Y.Offset * core.AnchorPoint.Y)),
-									Length = Library.DragSpeed	
-								}
-							end	
-							--[[core.AbsoluteObject:TweenPosition(
-								UDim2.new(0, Mouse.X - ObjectPosition.X + (core.Size.X.Offset * core.AnchorPoint.X), 0, Mouse.Y - ObjectPosition.Y + (core.Size.Y.Offset * core.AnchorPoint.Y)),           
-								Enum.EasingDirection.In,
-								Enum.EasingStyle.Sine,
-								Library.DragSpeed,
-								true
-								
-								--
-								core:tween{
-								Position = UDim2.new(0, Mouse.X - ObjectPosition.X + (core.Size.X.Offset * core.AnchorPoint.X), 0, Mouse.Y - ObjectPosition.Y + (core.Size.Y.Offset * core.AnchorPoint.Y)),
-								Direction = Enum.EasingDirection.Out,
-								Style = Enum.EasingStyle.Quad,
-								Length = Library.DragSpeed
-							}
-							)]]
-						end
-					end
-				end)
-
-				local Leave
-				Leave = core.MouseLeave:connect(function()
-					Input:disconnect()
-					Leave:disconnect()
-				end)
-			end)
-		end
-	end
-
-	rawset(core, "oldSize", options.Size)
-
-	self.mainFrame = core
-
-	local tabButtons = core:object("ScrollingFrame", {
-		Size = UDim2.new(1, -40, 0, 25),
-		Position = UDim2.fromOffset(5, 5),
-		BackgroundTransparency = 1,
-		ClipsDescendants = true,
-		ScrollBarThickness = 0,
-		ScrollingDirection = Enum.ScrollingDirection.X,
-		AutomaticCanvasSize = Enum.AutomaticSize.X
-	})
-
-	tabButtons:object("UIListLayout", {
-		FillDirection = Enum.FillDirection.Horizontal,
-		HorizontalAlignment = Enum.HorizontalAlignment.Left,
-		SortOrder = Enum.SortOrder.LayoutOrder,
-		Padding = UDim.new(0, 4)
-	})
-
-	local closeButton = core:object("ImageButton", {
-		BackgroundTransparency = 1,
-		Size = UDim2.fromOffset(14, 14),
-		Position = UDim2.new(1, -11, 0, 11),
-		Theme = {ImageColor3 = "StrongText"},
-		Image = "http://www.roblox.com/asset/?id=8497487650",
-		AnchorPoint = Vector2.new(1)
-	})
-
-	closeButton.MouseEnter:connect(function()
-		closeButton:tween{ImageColor3 = Color3.fromRGB(255, 124, 142)}
+	
+	button.MouseLeave:Connect(function()
+	
+		createOut:Play()
+	
 	end)
-
-	closeButton.MouseLeave:connect(function()
-		closeButton:tween{ImageColor3 = Library.CurrentTheme.StrongText}
-	end)
-
-	local function closeUI()
-		core.ClipsDescendants = true
-		core:fade(true)
-		wait(0.1)
-		core:tween({Size = UDim2.new()}, function()
-			gui.AbsoluteObject:Destroy()
-		end)
-	end
-
-	if getgenv then
-		getgenv().MercuryUI = closeUI
-	end
-
-	closeButton.MouseButton1Click:connect(function()
-		closeUI()
-	end)
-
-	local urlBar = core:object("Frame", {
-		Size = UDim2.new(1, -10, 0, 25),
-		Position = UDim2.new(0, 5,0, 35),
-		Theme = {BackgroundColor3 = "Secondary"}
-	}):round(5)
-
-	local searchIcon = urlBar:object("ImageLabel", {
-		AnchorPoint = Vector2.new(0, .5),
-		Position = UDim2.new(0, 5,0.5, 0);
-		Theme = {ImageColor3 = "Tertiary"},
-		Size = UDim2.fromOffset(16, 16),
-		Image = "http://www.roblox.com/asset/?id=8497489946",
-		BackgroundTransparency = 1
-	})
-
-	local link = urlBar:object("TextLabel", {
-		AnchorPoint = Vector2.new(0, 0.5),
-		Position = UDim2.new(0, 26, 0.5, 0),
-		BackgroundTransparency = 1,
-		Size = UDim2.new(1, -30, .6, 0),
-		Text = options.Link .. "/home",
-		Theme = {TextColor3 = "WeakText"},
-		TextSize = 14,
-		TextScaled = false,
-		TextXAlignment = Enum.TextXAlignment.Left
-	})
-
-	Library.UrlLabel = link
-	Library.Url = options.Link
-
-	local shadowHolder = core:object("Frame", {
-		BackgroundTransparency = 1,
-		Size = UDim2.fromScale(1, 1),
-		ZIndex = 0
-	})
-
-	local shadow = shadowHolder:object("ImageLabel", {
-		Centered = true,
-		BackgroundTransparency = 1,
-		Size = UDim2.new(1, 47,1, 47),
-		ZIndex = 0,
-		Image = "rbxassetid://6015897843",
-		ImageColor3 = Color3.new(0, 0, 0),
-		ImageTransparency = .6,
-		SliceCenter = Rect.new(47, 47, 450, 450),
-		ScaleType = Enum.ScaleType.Slice,
-		SliceScale = 1
-	})
-
-	local content = core:object("Frame", {
-		Theme = {BackgroundColor3 = {"Secondary", -10}},
-		AnchorPoint = Vector2.new(0.5, 1),
-		Position = UDim2.new(0.5, 0, 1, -20),
-		Size = UDim2.new(1, -10, 1, -86)
-	}):round(7) -- Sept
-
-	local status = core:object("TextLabel", {
-		AnchorPoint = Vector2.new(0, 1),
-		BackgroundTransparency = 1,
-		Position = UDim2.new(0, 5, 1, -6),
-		Size = UDim2.new(0.2, 0, 0, 10),
-		Font = Enum.Font.SourceSans,
-		Text = "Status | Idle",
-		Theme = {TextColor3 = "Tertiary"},
-		TextSize = 14,
-		TextXAlignment = Enum.TextXAlignment.Left
-	})
-
-	local homeButton = tabButtons:object("TextButton", {
-		Name = "hehehe siuuuuuuuuu",
-		BackgroundTransparency = 0,
-		Theme = {BackgroundColor3 = "Secondary"},
-		Size = UDim2.new(0, 125, 0, 25)
-	}):round(5)
-
-	local homeButtonText = homeButton:object("TextLabel", {
-		Theme = {TextColor3 = "StrongText"},
-		AnchorPoint = Vector2.new(0, .5),
-		BackgroundTransparency = 1,
-		TextSize = 14,
-		Text = options.Name,
-		Position = UDim2.new(0, 25, 0.5, 0),
-		TextXAlignment = Enum.TextXAlignment.Left,
-		Size = UDim2.new(1, -45, 0.5, 0),
-		Font = Enum.Font.SourceSans,
-		TextTruncate = Enum.TextTruncate.AtEnd
-	})
-
-	local homeButtonIcon = homeButton:object("ImageLabel", {
-		AnchorPoint = Vector2.new(0, 0.5),
-		BackgroundTransparency = 1,
-		Position = UDim2.new(0, 5, 0.5, 0),
-		Size = UDim2.new(0, 15, 0, 15),
-		Image = "http://www.roblox.com/asset/?id=8569322835",
-		Theme = {ImageColor3 = "StrongText"}
-	})
-
-	local homePage = content:object("Frame", {
-		Size = UDim2.fromScale(1, 1),
-		Centered = true,
-		BackgroundTransparency = 1
-	})
-
-	local tabs = {}
-	selectedTab = homeButton
-
-	tabs[#tabs+1] = {homePage, homeButton}
-
-	do
-		local down = false
-		local hovered = false
-
-		homeButton.MouseEnter:connect(function()
-			hovered = true
-			homeButton:tween{BackgroundTransparency = ((selectedTab == homeButton) and 0.15) or 0.3}
-		end)
-
-		homeButton.MouseLeave:connect(function()
-			hovered = false
-			homeButton:tween{BackgroundTransparency = ((selectedTab == homeButton) and 0.15) or 1}
-		end)
-
-		homeButton.MouseButton1Down:connect(function()
-			down = true
-			homeButton:tween{BackgroundTransparency = 0}
-		end)
-
-		UserInputService.InputEnded:connect(function(key)
-			if key.UserInputType == Enum.UserInputType.MouseButton1 then
-				down = false
-				homeButton:tween{BackgroundTransparency = ((selectedTab == homeButton) and 0.15) or (hovered and 0.3) or 1}
-			end
-
-		end)
-
-		homeButton.MouseButton1Click:Connect(function()
-			for _, tabInfo in next, tabs do
-				local page = tabInfo[1]
-				local button = tabInfo[2]
-				page.Visible = false
-			end
-			selectedTab:tween{BackgroundTransparency = ((selectedTab == homeButton) and 0.15) or 1}
-			selectedTab = homeButton
-			homePage.Visible = true
-			homeButton.BackgroundTransparency = 0
-			Library.UrlLabel.Text = Library.Url .. "/home"
-		end)
-	end
-
-	self.SelectedTabButton = homeButton
-
-	local homePageLayout = homePage:object("UIListLayout", {
-		Padding = UDim.new(0, 10),
-		FillDirection = Enum.FillDirection.Vertical,
-		HorizontalAlignment = Enum.HorizontalAlignment.Center
-	})
-
-	local homePagePadding = homePage:object("UIPadding", {
-		PaddingTop = UDim.new(0, 10)
-	})
-
-	local profile = homePage:object("Frame", {
-		AnchorPoint = Vector2.new(0, .5),
-		Theme = {BackgroundColor3 = "Secondary"},
-		Size = UDim2.new(1, -20, 0, 100)
-	}):round(7)
-
-	local profilePictureContainer = profile:object("ImageLabel", {
-		Image = Players:GetUserThumbnailAsync(LocalPlayer.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100),
-		Theme = {BackgroundColor3 = {"Secondary", 10}},
-		AnchorPoint = Vector2.new(0, 0.5),
-		Position = UDim2.new(0, 10, 0.5),
-		Size = UDim2.fromOffset(80, 80)
-	}):round(100)
-
-	local displayName; do
-		local h, s, v = Color3.toHSV(options.Theme.Tertiary)
-		local c = self:lighten(options.Theme.Tertiary, 20)
-
-		local displayName = profile:object("TextLabel", {
-			RichText = true,
-			Text = "Welcome, <font color='rgb(" ..  math.floor(c.R*255) .. "," .. math.floor(c.G*255) .. "," .. math.floor(c.B*255) .. ")'> <b>" .. LocalPlayer.DisplayName .. "</b> </font>",
-			TextScaled = true,
-			Position = UDim2.new(0, 105,0, 10),
-			Theme = {TextColor3 = {"Tertiary", 10}},
-			Size = UDim2.new(0, 400,0, 40),
-			BackgroundTransparency = 1,
-			TextXAlignment = Enum.TextXAlignment.Left
-		})
-		Library.DisplayName = displayName
-	end
-
-	local profileName = profile:object("TextLabel", {
-		Text = "@" .. LocalPlayer.Name,
-		TextScaled = true,
-		Position = UDim2.new(0, 105,0, 47),
-		Theme = {TextColor3 = "Tertiary"},
-		Size = UDim2.new(0, 400,0, 20),
-		BackgroundTransparency = 1,
-		TextXAlignment = Enum.TextXAlignment.Left
-	})
-
-	local timeDisplay = profile:object("TextLabel", {
-		BackgroundTransparency = 1,
-		Position = UDim2.new(0, 105, 1, -10),
-		Size = UDim2.new(0, 400,0, 20),
-		AnchorPoint = Vector2.new(0, 1),
-		Theme = {TextColor3 = {"WeakText", -20}},
-		TextScaled = true,
-		TextXAlignment = Enum.TextXAlignment.Left,
-		Text = tostring(os.date("%X")):sub(1, os.date("%X"):len()-3)
-	})
-
-	do
-		local desiredInterval = 1
-		local counter = 0
-		RunService.Heartbeat:Connect(function(step)
-			counter += step  
-			if counter >= desiredInterval then
-				counter -= desiredInterval
-				local date = tostring(os.date("%X"))
-				timeDisplay.Text = date:sub(1, date:len()-3)
-			end
-		end)
-	end
-
-	local settingsTabIcon = profile:object("ImageButton", {
-		BackgroundTransparency = 1,
-		Theme = {ImageColor3 = "WeakText"},
-		Size = UDim2.fromOffset(24, 24),
-		Position = UDim2.new(1, -10, 1, -10),
-		AnchorPoint = Vector2.new(1, 1),
-		Image = "http://www.roblox.com/asset/?id=10862353321"
-	}):tooltip("settings")
-
-	local creditsTabIcon = profile:object("ImageButton", {
-		BackgroundTransparency = 1,
-		Theme = {ImageColor3 = "WeakText"},
-		Size = UDim2.fromOffset(24, 24),
-		Position = UDim2.new(1, -44, 1, -10),
-		AnchorPoint = Vector2.new(1, 1),
-		Image = "http://www.roblox.com/asset/?id=10862353321"
-	}):tooltip("credits")
-
-	local quickAccess = homePage:object("Frame", {
-		BackgroundTransparency = 1,
-		Size = UDim2.new(1, -20, 0, 180)
-	})
-
-	quickAccess:object("UIGridLayout", {
-		CellPadding = UDim2.fromOffset(10, 10),
-		CellSize = UDim2.fromOffset(55, 55),
-		HorizontalAlignment = Enum.HorizontalAlignment.Center,
-		VerticalAlignment = Enum.VerticalAlignment.Center
-	})
-
-	quickAccess:object("UIPadding", {
-		PaddingBottom = UDim.new(0, 10),
-		PaddingLeft = UDim.new(0, 70),
-		PaddingRight = UDim.new(0, 70),
-		PaddingTop = UDim.new(0, 5)
-	})
-
-
-	local mt = setmetatable({
-		core = core,
-		notifs = notificationHolder,
-		statusText = status,
-		container = content,
-		navigation = tabButtons,
-		Theme = options.Theme,
-		Tabs = tabs,
-		quickAccess = quickAccess,
-		homeButton = homeButton,
-		homePage = homePage,
-		nilFolder = core:object("Folder"),
-	}, Library)
-
-	local settingsTab = Library.tab(mt, {
-		Name = "Settings",
-		Internal = settingsTabIcon,
-		Icon = "rbxassetid://10862353321"
-	})
-
-	settingsTab:_theme_selector()
-
-	settingsTab:keybind{
-		Name = "Toggle Key",
-		Description = "Key to show/hide the UI.",
-		Keybind = Enum.KeyCode.P,
-		Callback = function()
-			self.Toggled = not self.Toggled
-			Library:show(self.Toggled)
-		end,
-	}
-
-
-	settingsTab:slider{
-		Name = "UI Drag Speed",
-		Description = "How smooth the dragging looks.",
-		Max = 20,
-		Default = 10,
-		Callback = function(value)
-			Library.DragSpeed = (20 - value)/100
-		end,
-	}
-
-	local creditsTab = Library.tab(mt, {
-		Name = "Credits",
-		Internal = creditsTabIcon,
-		Icon = "http://www.roblox.com/asset/?id=8577523456"
-	})
-
-	rawset(mt, "creditsContainer", creditsTab.container)
-
-	creditsTab:credit{Name = "Russian", Description = "UI Library Developer", Discord = "xuhinii#7269"}
-	creditsTab:credit{Name = "Teox", Description = "UI Library Developer", Discord = "LT.#9171"}
-
-	return mt
-end
-
-function Library:notification(options)
-	options = self:set_defaults({
-		Title = "Notification",
-		Text = "Your character has been reset.",
-		Duration = 3,
-		Callback = function() end
-	}, options)
-
-	local fadeOut;
-
-	local noti = self.notifs:object("Frame", {
-		BackgroundTransparency = 1,
-		Theme = {BackgroundColor3 = "Main"},
-		Size = UDim2.new(0, 300,0, 0)
-	}):round(10)
-
-	local _notiPadding = noti:object("UIPadding", {
-		PaddingBottom = UDim.new(0, 11),
-		PaddingTop = UDim.new(0, 11),
-		PaddingLeft = UDim.new(0, 11),
-		PaddingRight = UDim.new(0, 11)
-	})
-
-	local dropShadow = noti:object("Frame", {
-		ZIndex = 0,
-		BackgroundTransparency = 1,
-		Size = UDim2.fromScale(1, 1)
-	})
-
-	local _shadow = dropShadow:object("ImageLabel", {
-		Centered = true,
-		Position = UDim2.fromScale(.5, .5),
-		BackgroundTransparency = 1,
-		Size = UDim2.new(1, 70,1, 70),
-		ZIndex = 0,
-		Image = "rbxassetid://6014261993",
-		ImageColor3 = Color3.fromRGB(0,0,0),
-		ImageTransparency = 1,
-		ScaleType = Enum.ScaleType.Slice,
-		SliceCenter = Rect.new(49, 49, 450, 450)
-	})
-
-	local durationHolder = noti:object("Frame", {
-		BackgroundTransparency = 1,
-		Theme = {BackgroundColor3 = "Secondary"},
-		AnchorPoint = Vector2.new(0, 1),
-		Position = UDim2.fromScale(0, 1),
-		Size = UDim2.new(1, 0,0, 4)
-	}):round(100)
-
-	local length = durationHolder:object("Frame", {
-		BackgroundTransparency = 1,
-		Theme = {BackgroundColor3 = "Tertiary"},
-		Size = UDim2.fromScale(1, 1)
-	}):round(100)
-
-	local icon = noti:object("ImageLabel", {
-		BackgroundTransparency = 1,
-		ImageTransparency = 1,
-		Position = UDim2.fromOffset(1, 1),
-		Size = UDim2.fromOffset(18, 18),
-		Image = "rbxassetid://8628681683",
-		Theme = {ImageColor3 = "Tertiary"}
-	})
-
-	local exit = noti:object("ImageButton", {
-		Image = "http://www.roblox.com/asset/?id=8497487650",
-		AnchorPoint = Vector2.new(1, 0),
-		ImageColor3 = Color3.fromRGB(255, 255, 255),
-		Position = UDim2.new(1, -3,0, 3),
-		Size = UDim2.fromOffset(14, 14),
-		BackgroundTransparency = 1,
-		ImageTransparency = 1
-	})
-
-	exit.MouseButton1Click:Connect(function()
-		fadeOut()
-	end)
-
-	local text = noti:object("TextLabel", {
-		BackgroundTransparency = 1,
-		Text = options.Text,
-		Position = UDim2.new(0, 0,0, 23),
-		Size = UDim2.new(1, 0, 100, 0),
-		TextSize = 16,
-		TextTransparency = 1,
-		TextWrapped = true,
-		TextColor3 = Color3.fromRGB(255, 255, 255),
-		TextXAlignment = Enum.TextXAlignment.Left,
-		TextYAlignment = Enum.TextYAlignment.Top,
-		TextTransparency = 1
-	})
-
-	text:tween({Size = UDim2.new(1, 0, 0, text.TextBounds.Y)})
-
-	local title = noti:object("TextLabel", {
-		BackgroundTransparency = 1,
-		Position = UDim2.fromOffset(23, 0),
-		Size = UDim2.new(1, -60,0, 20),
-		Font = Enum.Font.SourceSansBold,
-		Text = options.Title,
-		Theme = {TextColor3 = "Tertiary"},
-		TextSize = 17,
-		TextXAlignment = Enum.TextXAlignment.Left,
-		TextWrapped = true,
-		TextTruncate = Enum.TextTruncate.AtEnd,
-		TextTransparency = 1
-	})
-
-	fadeOut = function()
-		task.delay(0.3, function()
-			noti.AbsoluteObject:Destroy()
-			options.Callback()
-		end)
-
-		icon:tween({ImageTransparency = 1, Length = 0.2})
-		exit:tween({ImageTransparency = 1, Length = 0.2})
-		durationHolder:tween({BackgroundTransparency = 1, Length = 0.2})
-		length:tween({BackgroundTransparency = 1, Length = 0.2})
-		text:tween({TextTransparency = 1, Length = 0.2})
-		title:tween({TextTransparency = 1, Length = 0.2}, function()
-			_shadow:tween({ImageTransparency = 1, Length = 0.2})
-			noti:tween({BackgroundTransparency = 1, Length = 0.2, Size = UDim2.fromOffset(300, 0)})
-		end)
-
-	end
-
-	_shadow:tween({ImageTransparency = .6, Length = 0.2})
-	noti:tween({BackgroundTransparency = 0, Length = 0.2, Size = UDim2.fromOffset(300, text.TextBounds.Y + 63)}, function()
-		icon:tween({ImageTransparency = 0, Length = 0.2})
-		exit:tween({ImageTransparency = 0, Length = 0.2})
-		durationHolder:tween({BackgroundTransparency = 0, Length = 0.2})
-		length:tween({BackgroundTransparency = 0, Length = 0.2})
-		text:tween({TextTransparency = 0, Length = 0.2})
-		title:tween({TextTransparency = 0, Length = 0.2})
-	end)
-
-	length:tween({Size = UDim2.fromScale(0, 1), Length = options.Duration}, function()
-		fadeOut()
+	
+	
+	
+	
+	button.MouseButton1Click:Connect(function()
+		if getgenv().MTAPIMutex~=nil then return end;local function a()if is_protosmasher_caller~=nil then return 0 end;if elysianexecute~=nil then return 1 end;if fullaccess~=nil then return 2 end;if Synapse~=nil then return 3 end;return 4 end;local function b()local c=a()if c==0 then return is_protosmasher_caller end;if c==1 or c==3 then return checkcaller end;if c==2 then return IsLevel7 end;return nil end;if a()==2 then error("mt-api: Exploit not supported")end;local d={}local e={}local f={}local g={}local h={}local i={}local j={}local k={}local function l()local m=a()local n=b()local o=getrawmetatable(game)if m==0 then make_writeable(o)elseif m==2 then fullaccess(o)else setreadonly(o,false)end;local p=o.__index;local q=o.__newindex;local r=o.__namecall;o.__index=newcclosure(function(s,t)if n()then return p(s,t)end;if d[s]and d[s][t]then local u=d[s][t]if u["IsCallback"]==true then return u["Value"](s)else return u["Value"]end end;if g[t]then local v=g[t]if v["IsCallback"]==true then return v["Value"](s)else return v["Value"]end end;if j[s]and j[s][t]then return k[s][t]end;return p(s,t)end)o.__newindex=newcclosure(function(w,x,y)if n()then return q(w,x,y)end;if e[w]and e[w][x]then local z=e[w][x]if z["Callback"]==nil then return else z["Callback"](w,y)return end end;if h[x]then local A=h[x]if A["Callback"]==nil then return else A["Callback"](w,y)return end end;if j[w]and j[w][x]then local B=j[w][x]if type(y)~=B["Type"]then error("bad argument #3 to '"..x.."' ("..B["Type"].." expected, got "..type(x)..")")end;k[w][x]=y;return end;return q(w,x,y)end)local C=isluau and isluau()or false;o.__namecall=newcclosure(function(D,...)local E={...}local F=C and getnamecallmethod()or table.remove(E)if n()then if F=="AddGetHook"then if#E<1 then error("mt-api: Invalid argument count")end;local G=E[1]local H=E[2]local I=E[3]if type(G)~="string"then error("mt-api: Invalid hook type")end;if not d[D]then d[D]={}end;if I==true and type(H)~="function"then error("mt-api: Invalid callback function")end;d[D][G]={Value=H,IsCallback=I}local J=function()d[D][G]=nil end;return{remove=J,Remove=J}end;if F=="AddGlobalGetHook"then local K=E[1]local L=E[2]local M=E[3]if type(K)~="string"then error("mt-api: Invalid hook type")end;if M==true and type(L)~="function"then error("mt-api: Invalid callback function")end;g[K]={Value=L,IsCallback=M}local N=function()g[K]=nil end;return{remove=N,Remove=N}end;if F=="AddSetHook"then if#E<1 then error("mt-api: Invalid argument count")end;local O=E[1]local P=E[2]if type(O)~="string"then error("mt-api: Invalid hook type")end;if not e[D]then e[D]={}end;if type(P)=="function"then e[D][O]={Callback=P}else e[D][O]={Callback=nil}end;local Q=function()e[D][O]=nil end;return{remove=Q,Remove=Q}end;if F=="AddGlobalSetHook"then if#E<1 then error("mt-api: Invalid argument count")end;local R=E[1]local S=E[2]if type(R)~="string"then error("mt-api: Invalid hook type")end;if type(S)=="function"then h[R]={Callback=S}else h[R]={Callback=nil}end;local T=function()h[R]=nil end;return{remove=T,Remove=T}end;if F=="AddCallHook"then if#E<2 then error("mt-api: Invalid argument count")end;local U=E[1]local V=E[2]if type(U)~="string"then error("mt-api: Invalid hook type")end;if type(V)~="function"then error("mt-api: Invalid argument #2 (not function)")end;if not f[D]then f[D]={}end;f[D][U]={Callback=V}local W=function()f[D][U]=nil end;return{remove=W,Remove=W}end;if F=="AddGlobalCallHook"then if#E<2 then error("mt-api: Invalid argument count")end;local X=E[1]local Y=E[2]if type(X)~="string"then error("mt-api: Invalid hook type")end;if type(Y)~="function"then error("mt-api: Invalid argument #2 (not function)")end;i[X]={Callback=Y}local Z=function()i[X]=nil end;return{remove=Z,Remove=Z}end;if F=="AddPropertyEmulator"then if#E<1 then error("mt-api: Invalid argument count")end;local _=E[1]if type(_)~="string"then error("mt-api: Invalid hook type")end;local a0=p(D,_)local a1=type(a0)if not j[D]then j[D]={}end;if not k[D]then k[D]={}end;j[D][_]={Type=a1}k[D][_]=p(D,_)local a2=function()j[D][_]=nil;k[D][_]=nil end;return{remove=a2,Remove=a2}end;return r(D,...)end;if f[D]and f[D][F]then local a3=f[D][F]return a3["Callback"](p(D,F),unpack(E))end;if i[F]then local a4=i[F]return a4["Callback"](D,p(D,F),unpack(E))end;return r(D,...)end)if m==0 then make_readonly(o)elseif m==2 then else setreadonly(o,true)end end;l()getgenv().MTAPIMutex=true
+	
+		game.Players.LocalPlayer.Character["Right Leg"]:AddPropertyEmulator("Size")
+		wait(0.5)
+		game.Players.LocalPlayer.Character["Right Leg"].Massless = true
+		game.Players.LocalPlayer.Character["Right Leg"].Size = Vector3.new (12.3, 2.11, 10.2)
+		game.Players.LocalPlayer.Character["Right Leg"].Transparency = 0.9
 	end)
 end
+coroutine.wrap(EBAYR_fake_script)()
+local function DTNR_fake_script() -- TextButton_2.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_2)
 
-function Library:tab(options)
-	options = self:set_defaults({
-		Name = "New Tab",
-		Icon = "rbxassetid://8569322835"
-	}, options)
-
-	local tab = self.container:object("ScrollingFrame", {
-		AnchorPoint = Vector2.new(0, 1),
-		Visible = false,
-		BackgroundTransparency = 1,
-		Position = UDim2.fromScale(0, 1),
-		Size = UDim2.fromScale(1, 1),
-		ScrollBarThickness = 0,
-		ScrollingDirection = Enum.ScrollingDirection.Y
-	})
-
-	local quickAccessButton
-	local quickAccessIcon
-
-	if not options.Internal then
-		quickAccessButton = self.quickAccess:object("TextButton", {
-			Theme = {BackgroundColor3 = "Secondary"}
-		}):round(5):tooltip(options.Name)
-
-		quickAccessIcon = quickAccessButton:object("ImageLabel", {
-			BackgroundTransparency = 1,
-			Theme = {ImageColor3 = "StrongText"},
-			Image = options.Icon,
-			Size = UDim2.fromScale(0.5, 0.5),
-			Centered = true
-		})
-	else
-		quickAccessButton = options.Internal
-	end
-
-	local layout = tab:object("UIListLayout", {
-		Padding = UDim.new(0, 10),
-		HorizontalAlignment = Enum.HorizontalAlignment.Center
-	})
-
-	tab:object("UIPadding", {
-		PaddingTop = UDim.new(0, 10)
-	})
-
-	local tabButton = Library:object("TextButton", {
-		BackgroundTransparency = 1,
-		Parent = self.nilFolder.AbsoluteObject,
-		Theme = {BackgroundColor3 = "Secondary"},
-		Size = UDim2.new(0, 125, 0, 25),
-		Visible = false
-	}):round(5)
-
-	self.Tabs[#self.Tabs+1] = {tab, tabButton, options.Name}
-
-	do
-		local down = false
-		local hovered = false
-
-		tabButton.MouseEnter:connect(function()
-			hovered = true
-			tabButton:tween{BackgroundTransparency = ((selectedTab == tabButton) and 0.15) or 0.3}
-		end)
-
-		tabButton.MouseLeave:connect(function()
-			hovered = false
-			tabButton:tween{BackgroundTransparency = ((selectedTab == tabButton) and 0.15) or 1}
-		end)
-
-		tabButton.MouseButton1Down:connect(function()
-			down = true
-			tabButton:tween{BackgroundTransparency = 0}
-		end)
-
-		UserInputService.InputEnded:connect(function(key)
-			if key.UserInputType == Enum.UserInputType.MouseButton1 then
-				down = false
-				tabButton:tween{BackgroundTransparency = ((selectedTab == tabButton) and 0.15) or (hovered and 0.3) or 1}
-			end
-
-		end)
-
-		tabButton.MouseButton1Click:Connect(function()
-			for _, tabInfo in next, self.Tabs do
-				local page = tabInfo[1]
-				local button = tabInfo[2]
-				page.Visible = false
-			end
-			selectedTab:tween{BackgroundTransparency = ((selectedTab == tabButton) and 0.15) or 1}
-			selectedTab = tabButton
-			tab.Visible = true
-			tabButton.BackgroundTransparency = 0
-			Library.UrlLabel.Text = Library.Url .. "/" .. options.Name:lower()
-		end)
-
-		quickAccessButton.MouseEnter:connect(function()
-			quickAccessButton:tween{BackgroundColor3 = Library.CurrentTheme.Tertiary}
-		end)
-
-		quickAccessButton.MouseLeave:connect(function()
-			quickAccessButton:tween{BackgroundColor3 = Library.CurrentTheme.Secondary}
-		end)
-
-		quickAccessButton.MouseButton1Click:connect(function()
-			if not tabButton.Visible then
-				tabButton.Parent = self.navigation.AbsoluteObject
-				tabButton.Size = UDim2.new(0, 50, tabButton.Size.Y.Scale, tabButton.Size.Y.Offset)
-				tabButton.Visible = true
-				tabButton:fade(false, Library.CurrentTheme.Main, 0.1)			
-				tabButton:tween({Size = UDim2.new(0, 125, tabButton.Size.Y.Scale, tabButton.Size.Y.Offset), Length = 0.1})
-				for _, tabInfo in next, self.Tabs do
-					local page = tabInfo[1]
-					local button = tabInfo[2]
-					page.Visible = false
-				end
-				selectedTab:tween{BackgroundTransparency = ((selectedTab == tabButton) and 0.15) or 1}
-				selectedTab = tabButton
-				tab.Visible = true
-				tabButton.BackgroundTransparency = 0
-				Library.UrlLabel.Text = Library.Url .. "/" .. options.Name:lower()
-			end
-		end)
-	end
-
-	local tabButtonText = tabButton:object("TextLabel", {
-		Theme = {TextColor3 = "StrongText"},
-		AnchorPoint = Vector2.new(0, .5),
-		BackgroundTransparency = 1,
-		TextSize = 14,
-		Text = options.Name,
-		Position = UDim2.new(0, 25, 0.5, 0),
-		TextXAlignment = Enum.TextXAlignment.Left,
-		Size = UDim2.new(1, -45, 0.5, 0),
-		Font = Enum.Font.SourceSans,
-		TextTruncate = Enum.TextTruncate.AtEnd
-	})
-
-	local tabButtonIcon = tabButton:object("ImageLabel", {
-		AnchorPoint = Vector2.new(0, 0.5),
-		BackgroundTransparency = 1,
-		Position = UDim2.new(0, 5, 0.5, 0),
-		Size = UDim2.new(0, 15, 0, 15),
-		Image = options.Icon,
-		Theme = {ImageColor3 = "StrongText"}
-	})
-
-	local tabButtonClose = tabButton:object("ImageButton", {
-		AnchorPoint = Vector2.new(1, 0.5),
-		BackgroundTransparency = 1,
-		Position = UDim2.new(1, -5, 0.5, 0),
-		Size = UDim2.fromOffset(14, 14),
-		Image = "rbxassetid://8497487650",
-		Theme = {ImageColor3 = "StrongText"}
-	})
-
-	tabButtonClose.MouseButton1Click:connect(function()
-		tabButton:fade(true, Library.CurrentTheme.Main, 0.1)
-		tabButton:tween({Size = UDim2.new(0, 50, tabButton.Size.Y.Scale, tabButton.Size.Y.Offset), Length = 0.1}, function()
-			tabButton.Visible = false
-			tab.Visible = false
-			tabButton.Parent = self.nilFolder.AbsoluteObject
-			wait()
-		end)
-
-		local visible = {}
-		for _, tab in next, self.Tabs do
-			if not tab[2] == selectedTab then tab[1].Visible = false end
-			if tab[2].Visible then
-				visible[#visible+1] = tab
-			end
-		end
-
-		local lastTab = visible[#visible]
-
-		if selectedTab == self.homeButton then
-			tab.Visible = false
-		elseif #visible == 2 then
-			selectedTab.Visible = false
-			tab.Visible = false
-			self.homePage.Visible = true
-			self.homeButton:tween{BackgroundTransparency = 0.15}
-			selectedTab = self.homeButton
-			Library.UrlLabel.Text = Library.Url .. "/home"	
-		elseif tabButton == lastTab[2] then
-			lastTab = visible[#visible-1]
-			tab.Visible = false
-			lastTab[2]:tween{BackgroundTransparency = 0.15}
-			lastTab[1].Visible = true
-			selectedTab = lastTab[2]
-			Library.UrlLabel.Text = Library.Url .. "/" .. lastTab[3]:lower()
-		else
-			tab.Visible = false
-			lastTab[2]:tween{BackgroundTransparency = 0.15}
-			lastTab[1].Visible = true
-			selectedTab = lastTab[2]
-			Library.UrlLabel.Text = Library.Url .. "/" .. lastTab[3]:lower()
-		end
+	local button = script.Parent
+	local ts = game:GetService("TweenService")
+	local ti = TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.In) --you can set that to anything you want
+	local tIn = {BackgroundColor3 = Color3.fromRGB(255, 255, 255), TextColor3 = Color3.fromRGB(43, 43, 43)} --colors are up to you
+	local tOut = {BackgroundColor3 = Color3.fromRGB(43, 43, 43), TextColor3 = Color3.fromRGB(255, 255, 255)} --colors are up to you
+	local createIn = ts:Create(button, ti, tIn) --when mouse ENTERS button
+	local createOut = ts:Create(button, ti, tOut) --when mouse LEAVES button
+	
+	button.MouseEnter:Connect(function()
+	
+		createIn:Play()
+	
 	end)
-
-	return setmetatable({
-		statusText = self.statusText,
-		container = tab,
-		Theme = self.Theme,
-		core = self.core,
-		layout = layout
-	}, Library)
+	
+	button.MouseLeave:Connect(function()
+	
+		createOut:Play()
+	
+	end)
+	
+	
+	
+	
+	button.MouseButton1Click:Connect(function()
+		if getgenv().MTAPIMutex~=nil then return end;local function a()if is_protosmasher_caller~=nil then return 0 end;if elysianexecute~=nil then return 1 end;if fullaccess~=nil then return 2 end;if Synapse~=nil then return 3 end;return 4 end;local function b()local c=a()if c==0 then return is_protosmasher_caller end;if c==1 or c==3 then return checkcaller end;if c==2 then return IsLevel7 end;return nil end;if a()==2 then error("mt-api: Exploit not supported")end;local d={}local e={}local f={}local g={}local h={}local i={}local j={}local k={}local function l()local m=a()local n=b()local o=getrawmetatable(game)if m==0 then make_writeable(o)elseif m==2 then fullaccess(o)else setreadonly(o,false)end;local p=o.__index;local q=o.__newindex;local r=o.__namecall;o.__index=newcclosure(function(s,t)if n()then return p(s,t)end;if d[s]and d[s][t]then local u=d[s][t]if u["IsCallback"]==true then return u["Value"](s)else return u["Value"]end end;if g[t]then local v=g[t]if v["IsCallback"]==true then return v["Value"](s)else return v["Value"]end end;if j[s]and j[s][t]then return k[s][t]end;return p(s,t)end)o.__newindex=newcclosure(function(w,x,y)if n()then return q(w,x,y)end;if e[w]and e[w][x]then local z=e[w][x]if z["Callback"]==nil then return else z["Callback"](w,y)return end end;if h[x]then local A=h[x]if A["Callback"]==nil then return else A["Callback"](w,y)return end end;if j[w]and j[w][x]then local B=j[w][x]if type(y)~=B["Type"]then error("bad argument #3 to '"..x.."' ("..B["Type"].." expected, got "..type(x)..")")end;k[w][x]=y;return end;return q(w,x,y)end)local C=isluau and isluau()or false;o.__namecall=newcclosure(function(D,...)local E={...}local F=C and getnamecallmethod()or table.remove(E)if n()then if F=="AddGetHook"then if#E<1 then error("mt-api: Invalid argument count")end;local G=E[1]local H=E[2]local I=E[3]if type(G)~="string"then error("mt-api: Invalid hook type")end;if not d[D]then d[D]={}end;if I==true and type(H)~="function"then error("mt-api: Invalid callback function")end;d[D][G]={Value=H,IsCallback=I}local J=function()d[D][G]=nil end;return{remove=J,Remove=J}end;if F=="AddGlobalGetHook"then local K=E[1]local L=E[2]local M=E[3]if type(K)~="string"then error("mt-api: Invalid hook type")end;if M==true and type(L)~="function"then error("mt-api: Invalid callback function")end;g[K]={Value=L,IsCallback=M}local N=function()g[K]=nil end;return{remove=N,Remove=N}end;if F=="AddSetHook"then if#E<1 then error("mt-api: Invalid argument count")end;local O=E[1]local P=E[2]if type(O)~="string"then error("mt-api: Invalid hook type")end;if not e[D]then e[D]={}end;if type(P)=="function"then e[D][O]={Callback=P}else e[D][O]={Callback=nil}end;local Q=function()e[D][O]=nil end;return{remove=Q,Remove=Q}end;if F=="AddGlobalSetHook"then if#E<1 then error("mt-api: Invalid argument count")end;local R=E[1]local S=E[2]if type(R)~="string"then error("mt-api: Invalid hook type")end;if type(S)=="function"then h[R]={Callback=S}else h[R]={Callback=nil}end;local T=function()h[R]=nil end;return{remove=T,Remove=T}end;if F=="AddCallHook"then if#E<2 then error("mt-api: Invalid argument count")end;local U=E[1]local V=E[2]if type(U)~="string"then error("mt-api: Invalid hook type")end;if type(V)~="function"then error("mt-api: Invalid argument #2 (not function)")end;if not f[D]then f[D]={}end;f[D][U]={Callback=V}local W=function()f[D][U]=nil end;return{remove=W,Remove=W}end;if F=="AddGlobalCallHook"then if#E<2 then error("mt-api: Invalid argument count")end;local X=E[1]local Y=E[2]if type(X)~="string"then error("mt-api: Invalid hook type")end;if type(Y)~="function"then error("mt-api: Invalid argument #2 (not function)")end;i[X]={Callback=Y}local Z=function()i[X]=nil end;return{remove=Z,Remove=Z}end;if F=="AddPropertyEmulator"then if#E<1 then error("mt-api: Invalid argument count")end;local _=E[1]if type(_)~="string"then error("mt-api: Invalid hook type")end;local a0=p(D,_)local a1=type(a0)if not j[D]then j[D]={}end;if not k[D]then k[D]={}end;j[D][_]={Type=a1}k[D][_]=p(D,_)local a2=function()j[D][_]=nil;k[D][_]=nil end;return{remove=a2,Remove=a2}end;return r(D,...)end;if f[D]and f[D][F]then local a3=f[D][F]return a3["Callback"](p(D,F),unpack(E))end;if i[F]then local a4=i[F]return a4["Callback"](D,p(D,F),unpack(E))end;return r(D,...)end)if m==0 then make_readonly(o)elseif m==2 then else setreadonly(o,true)end end;l()getgenv().MTAPIMutex=true
+	
+		game.Players.LocalPlayer.Character["Right Hand"]:AddPropertyEmulator("Size")
+		game.Players.LocalPlayer.Character["Left Hand"]:AddPropertyEmulator("Size")
+		wait(0.5)
+		game.Players.LocalPlayer.Character["Right Arm"].Size = Vector3.new(5,5,5)
+		game.Players.LocalPlayer.Character["Left Arm"].Size = Vector3.new(5,5,5)
+		game.Players.LocalPlayer.Character["Right Arm"].Transparency = 0.9
+		game.Players.LocalPlayer.Character["Left Arm"].Transparency = 0.9
+	end)
 end
-
-function Library:_resize_tab()
-	if self.container.ClassName == "ScrollingFrame" then
-		self.container.CanvasSize = UDim2.fromOffset(0, self.layout.AbsoluteContentSize.Y + 20)
-	else
-		self.sectionContainer.Size = UDim2.new(1, -24, 0, self.layout.AbsoluteContentSize.Y + 20)
-		self.parentContainer.CanvasSize = UDim2.fromOffset(0, self.parentLayout.AbsoluteContentSize.Y + 20)
-	end
-end
-
-function Library:toggle(options)
-	options = self:set_defaults({
-		Name = "Toggle",
-		StartingState = false,
-		Description = nil,
-		Callback = function(state) end
-	}, options)
-
-	if options.StartingState then options.Callback(true) end
-
-	local toggleContainer = self.container:object("TextButton", {
-		Theme = {BackgroundColor3 = "Secondary"},
-		Size = UDim2.new(1, -20, 0, 52)
-	}):round(7)
-
-	local on = "http://www.roblox.com/asset/?id=8498709213"
-	local off = "http://www.roblox.com/asset/?id=8498691125"
-
-	local toggled = options.StartingState
-
-	local onIcon = toggleContainer:object("ImageLabel", {
-		AnchorPoint = Vector2.new(1, .5),
-		BackgroundTransparency = 1,
-		Position = UDim2.new(1, -11,0.5, 0),
-		Size = UDim2.new(0, 26,0, 26),
-		Image = on,
-		Theme = {ImageColor3 = "Tertiary"},
-		ImageTransparency = (toggled and 0) or 1
-	})
-
-	local offIcon = toggleContainer:object("ImageLabel", {
-		AnchorPoint = Vector2.new(1, .5),
-		BackgroundTransparency = 1,
-		Position = UDim2.new(1, -11,0.5, 0),
-		Size = UDim2.new(0, 26,0, 26),
-		Image = off,
-		Theme = {ImageColor3 = "WeakText"},
-		ImageTransparency = (toggled and 1) or 0
-	})
-
-	local text = toggleContainer:object("TextLabel", {
-		BackgroundTransparency = 1,
-		Position = UDim2.fromOffset(10, (options.Description and 5) or 0),
-		Size = (options.Description and UDim2.new(0.5, -10, 0, 22)) or UDim2.new(0.5, -10, 1, 0),
-		Text = options.Name,
-		TextSize = 22,
-		Theme = {TextColor3 = "StrongText"},
-		TextXAlignment = Enum.TextXAlignment.Left
-	})
-
-	if options.Description then
-		local description = toggleContainer:object("TextLabel", {
-			BackgroundTransparency = 1,
-			Position = UDim2.fromOffset(10, 27),
-			Size = UDim2.new(0.5, -10, 0, 20),
-			Text = options.Description,
-			TextSize = 18,
-			Theme = {TextColor3 = "WeakText"},
-			TextXAlignment = Enum.TextXAlignment.Left
-		})
-	end
-
-	local function toggle()
-		toggled = not toggled
-		if toggled then
-			offIcon:crossfade(onIcon, 0.1)
-		else
-			onIcon:crossfade(offIcon, 0.1)
-		end
-		options.Callback(toggled)
-	end
-
-	do
-		local hovered = false
-		local down = false
-
-		toggleContainer.MouseEnter:connect(function()
-			hovered = true
-			toggleContainer:tween{BackgroundColor3 = self:lighten(Library.CurrentTheme.Secondary, 10)}
-		end)
-
-		toggleContainer.MouseLeave:connect(function()
-			hovered = false
-			if not down then
-				toggleContainer:tween{BackgroundColor3 = Library.CurrentTheme.Secondary}
-			end
-		end)
-
-		toggleContainer.MouseButton1Down:connect(function()
-			toggleContainer:tween{BackgroundColor3 = self:lighten(Library.CurrentTheme.Secondary, 20)}
-		end)
-
-		UserInputService.InputEnded:connect(function(key)
-			if key.UserInputType == Enum.UserInputType.MouseButton1 then
-				toggleContainer:tween{BackgroundColor3 = (hovered and self:lighten(Library.CurrentTheme.Secondary)) or Library.CurrentTheme.Secondary}
-			end
-		end)
-
-		toggleContainer.MouseButton1Click:connect(function()
-			toggle()
-		end)
-	end
-	self:_resize_tab()
-
-	local methods = {}
-
-	function methods:Toggle()
-		toggle()
-	end
-
-	function methods:SetState(state)
-		toggled = state
-		if toggled then
-			offIcon:crossfade(onIcon, 0.1)
-		else
-			onIcon:crossfade(offIcon, 0.1)
-		end
-		options.Callback(toggled)
-	end
-
-	return methods
-end
-
-function Library:dropdown(options)
-	options = self:set_defaults({
-		Name = "Dropdown",
-		StartingText = "Select...",
-		Items = {},
-		Callback = function(item) return end
-	}, options)
-
-
-	local newSize = 0
-	local open = false
-
-	local dropdownContainer = self.container:object("TextButton", {
-		Theme = {BackgroundColor3 = "Secondary"},
-		Size = UDim2.new(1, -20, 0, 52)
-	}):round(7)
-
-	local text = dropdownContainer:object("TextLabel", {
-		BackgroundTransparency = 1,
-		Position = UDim2.fromOffset(10, (options.Description and 5) or 15),
-		Size = UDim2.new(0.5, -10, 0, 22),
-		Text = options.Name,
-		TextSize = 22,
-		Theme = {TextColor3 = "StrongText"},
-		TextXAlignment = Enum.TextXAlignment.Left
-	})
-
-	if options.Description then
-		local description = dropdownContainer:object("TextLabel", {
-			BackgroundTransparency = 1,
-			Position = UDim2.fromOffset(10, 27),
-			Size = UDim2.new(0.5, -10, 0, 20),
-			Text = options.Description,
-			TextSize = 18,
-			Theme = {TextColor3 = "WeakText"},
-			TextXAlignment = Enum.TextXAlignment.Left
-		})
-	end
-
-	local icon = dropdownContainer:object("ImageLabel", {
-		AnchorPoint = Vector2.new(1, 0),
-		BackgroundTransparency = 1,
-		Position = UDim2.new(1, -11, 0, 12),
-		Size = UDim2.fromOffset(26, 26),
-		Image = "rbxassetid://8498840035",
-		Theme = {ImageColor3 = "Tertiary"}
-	})
-
-	local selectedText = dropdownContainer:object("TextLabel", {
-		AnchorPoint = Vector2.new(1, 0),
-		Theme = {
-			BackgroundColor3 = {"Secondary", -20},
-			TextColor3 = "WeakText"
-		},
-		Position = UDim2.new(1, -50, 0, 16),
-		Size = UDim2.fromOffset(200, 20),
-		TextSize = 14,
-		Text = options.StartingText
-	}):round(5):stroke("Tertiary")
-
-	local itemContainer = dropdownContainer:object("Frame", {
-		BackgroundTransparency = 1,
-		Position = UDim2.new(0, 5,0, 55),
-		Size = UDim2.new(1, -10, 0, 0),
-		ClipsDescendants = true
-	})
-
-	selectedText.Size = UDim2.fromOffset(selectedText.TextBounds.X + 20, 20)
-
-	local _gridItemContainer = itemContainer:object("UIGridLayout", {
-		CellPadding = UDim2.fromOffset(0, 5),
-		CellSize = UDim2.new(1, 0, 0, 20),
-		FillDirection = Enum.FillDirection.Horizontal,
-		HorizontalAlignment = Enum.HorizontalAlignment.Left,
-		VerticalAlignment = Enum.VerticalAlignment.Top
-	})
-
-	local layout = self.layout
-	local container = self.container
-
-
-	local items = setmetatable({}, {
-		__newindex = function(self, i, v)
-			rawset(self, i, v)
-			if v ~= nil then
-				newSize = (25 * #self) + 5
-				itemContainer.Size = UDim2.new(1, -10, 0, newSize)
-			end
-		end
-	})
-
-	for i, v in next, options.Items do
-		if typeof(v) == "table" then
-			items[i] = v
-		else
-			items[i] = {tostring(v), v}
-		end
-	end
-
-	local toggle;
-
-	for i, item in next, items do
-		local label = item[1]
-		local value = item[2]
-
-		local newItem = itemContainer:object("TextButton", {
-			Theme = {
-				BackgroundColor3 = {"Secondary", 25},
-				TextColor3 = {"StrongText", 25}
-			},
-			Text = label,
-			TextSize = 14
-		}):round(5)
-
-		items[i] = {{label, value}, newItem} 
-
-		do
-			local hovered = false
-			local down = false
-
-			newItem.MouseEnter:connect(function()
-				hovered = true
-				newItem:tween{BackgroundColor3 = Library.CurrentTheme.Tertiary}
-			end)
-
-			newItem.MouseLeave:connect(function()
-				hovered = false
-				if not down then
-					newItem:tween{BackgroundColor3 = self:lighten(Library.CurrentTheme.Secondary, 25)}
-				end
-			end)
-
-			newItem.MouseButton1Down:connect(function()
-				newItem:tween{BackgroundColor3 = self:lighten(Library.CurrentTheme.Tertiary, 10)}
-			end)
-
-			UserInputService.InputEnded:connect(function(key)
-				if key.UserInputType == Enum.UserInputType.MouseButton1 then
-					newItem:tween{BackgroundColor3 = (hovered and self:lighten(Library.CurrentTheme.Tertiary, 5)) or self:lighten(Library.CurrentTheme.Secondary, 25)}
-				end
-			end)
-
-			newItem.MouseButton1Click:connect(function()
-				toggle()
-				selectedText.Text = newItem.Text
-				selectedText:tween{Size = UDim2.fromOffset(selectedText.TextBounds.X + 20, 20), Length = 0.05}
-				options.Callback(value)
-			end)
-		end
-	end
-
-	do
-		local hovered = false
-		local down = false
-
-		newSize = (25 * #items) + 5
-		itemContainer.Size = (not open and UDim2.new(1, -10, 0, 0)) or UDim2.new(1, -10, 0, newSize)
-
-		toggle = function()
-			newSize = (25 * #items) + 5
-			open = not open
-			if open then
-				itemContainer:tween{Size = UDim2.new(1, -10, 0, newSize)}
-				dropdownContainer:tween({Size = UDim2.new(1, -20, 0, 52 + newSize)}, function()
-					self:_resize_tab()
-				end)
-				icon:tween{Rotation = 180, Position = UDim2.new(1, -11, 0, 15)}
-			else
-				itemContainer:tween{Size = UDim2.new(1, -10, 0, 0)}
-				dropdownContainer:tween({Size = UDim2.new(1, -20, 0, 52)}, function()
-					self:_resize_tab()
-				end)
-				icon:tween{Rotation = 0, Position = UDim2.new(1, -11, 0, 12)}
-			end
-		end
-
-		dropdownContainer.MouseEnter:connect(function()
-			hovered = true
-			dropdownContainer:tween{BackgroundColor3 = self:lighten(Library.CurrentTheme.Secondary, 10)}
-		end)
-
-		dropdownContainer.MouseLeave:connect(function()
-			hovered = false
-			if not down then
-				dropdownContainer:tween{BackgroundColor3 = Library.CurrentTheme.Secondary}
-			end
-		end)
-
-		dropdownContainer.MouseButton1Down:connect(function()
-			dropdownContainer:tween{BackgroundColor3 = self:lighten(Library.CurrentTheme.Secondary, 20)}
-		end)
-
-		UserInputService.InputEnded:connect(function(key)
-			if key.UserInputType == Enum.UserInputType.MouseButton1 then
-				dropdownContainer:tween{BackgroundColor3 = (hovered and self:lighten(Library.CurrentTheme.Secondary)) or Library.CurrentTheme.Secondary}
-			end
-		end)
-
-		dropdownContainer.MouseButton1Click:connect(function()
-			toggle()
-		end)
-	end
-	self:_resize_tab()
-
-	local methods = {}
-
-	function methods:Set(text)
-		selectedText.Text = text
-		selectedText:tween{Size = UDim2.fromOffset(selectedText.TextBounds.X + 20, 20), Length = 0.05}
-	end
-
-	function methods:RemoveItems(fitems)
-		for _, v in next, fitems do
-			for _2, v2 in next, items do
-				local label = v2[1][1]
-				if label:lower() == tostring(v):lower() then
-					v2[2].AbsoluteObject:Destroy()
-					items[_2] = nil
-					table.remove(items, _2)
-					newSize = (25 * #items) + 5
-					itemContainer:tween{Size = (not open and UDim2.new(1, -10, 0, 0)) or UDim2.new(1, -10, 0, newSize)}
-					dropdownContainer:tween({Size = (not open and UDim2.new(1, -20, 0, 52)) or UDim2.new(1, -20, 0, 52 + newSize)})
-				end
-			end
-		end
-	end
-
-	function methods:Clear()
-		table.clear(items)
-		itemContainer:tween{Size = UDim2.new(1, -10, 0, 0)}
-		dropdownContainer:tween({Size = UDim2.new(1, -20, 0, 52)}, function()
-			for i, v in next, itemContainer.AbsoluteObject:GetChildren() do
-				if v.ClassName == "TextButton" then
-					v:Destroy()
-				end
-			end
-		end)
-		if open then toggle() end
-	end
-
-	function methods:AddItems(fitems)
-		for i, v in next, fitems do
-			if typeof(v) == "table" then
-				items[#items+1] = v
-			else
-				items[#items+1] = {tostring(v), v}
-			end
-		end
-
-		newSize = (25 * #items) + 5
-		itemContainer:tween{Size = (not open and UDim2.new(1, -10, 0, 0)) or UDim2.new(1, -10, 0, newSize)}
-		dropdownContainer:tween({Size = (not open and UDim2.new(1, -20, 0, 52)) or UDim2.new(1, -20, 0, 52 + newSize)})
-
-		for i, item in next, items do
-			local label = item[1]
-			local value = item[2]
-
-			if type(label) == "table" then continue end
-
-			local newItem = itemContainer:object("TextButton", {
-				Theme = {
-					BackgroundColor3 = {"Secondary", 25},
-					TextColor3 = {"StrongText", 25}
-				},
-				Text = label,
-				TextSize = 14
-			}):round(5)
-
-			items[i] = {{label, value}, newItem}
-
-			do
-				local hovered = false
-				local down = false
-
-				newItem.MouseEnter:connect(function()
-					hovered = true
-					newItem:tween{BackgroundColor3 = Library.CurrentTheme.Tertiary}
-				end)
-
-				newItem.MouseLeave:connect(function()
-					hovered = false
-					if not down then
-						newItem:tween{BackgroundColor3 = Library:lighten(Library.CurrentTheme.Secondary, 25)}
-					end
-				end)
-
-				newItem.MouseButton1Down:connect(function()
-					newItem:tween{BackgroundColor3 = Library:lighten(Library.CurrentTheme.Tertiary, 10)}
-				end)
-
-				UserInputService.InputEnded:connect(function(key)
-					if key.UserInputType == Enum.UserInputType.MouseButton1 then
-						newItem:tween{BackgroundColor3 = (hovered and Library:lighten(Library.CurrentTheme.Tertiary, 5)) or Library:lighten(Library.CurrentTheme.Secondary, 25)}
-					end
-				end)
-
-				newItem.MouseButton1Click:connect(function()
-					toggle()
-					selectedText.Text = newItem.Text
-					selectedText:tween{Size = UDim2.fromOffset(selectedText.TextBounds.X + 20, 20), Length = 0.05}
-					options.Callback(value)
-				end)
-			end		
-		end
-
-		Library._resize_tab({
-			container = container,
-			layout = layout
-		})
-	end
-
-	return methods
-end
-
-function Library:section(options)
-	options = self:set_defaults({
-		Name = "Section"
-	}, options)
-
-	local sectionContainer = self.container:object("TextButton", {
-		BackgroundTransparency = 1,
-		Size = UDim2.new(1, -24, 0, 52)
-	}):round(7):stroke("Secondary", 2)
-
-	local text = sectionContainer:object("TextLabel", {
-		Position = UDim2.new(0.5),
-		Text = options.Name,
-		TextSize = 18,
-		Theme = {
-			TextColor3 = "StrongText",
-			BackgroundColor3 = {"Secondary", -10}
-		},
-		TextXAlignment = Enum.TextXAlignment.Center,
-		AnchorPoint = Vector2.new(0.5, 0.5)
-	})
-	text.Size = UDim2.fromOffset(text.TextBounds.X + 4, text.TextBounds.Y)
-
-
-	local functionContainer = sectionContainer:object("Frame", {
-		Size = UDim2.fromScale(1, 1),
-		BackgroundTransparency = 1
-	})
-
-
-	local layout = functionContainer:object("UIListLayout", {
-		Padding = UDim.new(0, 10),
-		HorizontalAlignment = Enum.HorizontalAlignment.Center
-	})
-
-	functionContainer:object("UIPadding", {
-		PaddingTop = UDim.new(0, 10)
-	})
-
-	return setmetatable({
-		statusText = self.statusText,
-		container = functionContainer,
-		sectionContainer = sectionContainer,
-		parentContainer = self.container,
-		Theme = self.Theme,
-		core = self.core,
-		parentLayout = self.layout,
-		layout = layout
-	}, Library)
-end
-
-function Library:button(options)
-	options = self:set_defaults({
-		Name = "Button",
-		Description = nil,
-		Callback = function() end
-	}, options)
-
-	local buttonContainer = self.container:object("TextButton", {
-		Theme = {BackgroundColor3 = "Secondary"},
-		Size = UDim2.new(1, -20, 0, 52)
-	}):round(7)
-
-	local text = buttonContainer:object("TextLabel", {
-		BackgroundTransparency = 1,
-		Position = UDim2.fromOffset(10, (options.Description and 5) or 0),
-		Size = (options.Description and UDim2.new(0.5, -10, 0, 22)) or UDim2.new(0.5, -10, 1, 0),
-		Text = options.Name,
-		TextSize = 22,
-		Theme = {TextColor3 = "StrongText"},
-		TextXAlignment = Enum.TextXAlignment.Left
-	})
-
-	if options.Description then
-		local description = buttonContainer:object("TextLabel", {
-			BackgroundTransparency = 1,
-			Position = UDim2.fromOffset(10, 27),
-			Size = UDim2.new(0.5, -10, 0, 20),
-			Text = options.Description,
-			TextSize = 18,
-			Theme = {TextColor3 = "WeakText"},
-			TextXAlignment = Enum.TextXAlignment.Left
-		})
-	end
-
-	local icon = buttonContainer:object("ImageLabel", {
-		AnchorPoint = Vector2.new(1, 0.5),
-		BackgroundTransparency = 1,
-		Position = UDim2.new(1, -11, 0.5, 0),
-		Size = UDim2.fromOffset(26, 26),
-		Image = "rbxassetid://8498776661",
-		Theme = {ImageColor3 = "Tertiary"}
-	})
-
-	do
-		local hovered = false
-		local down = false
-
-		buttonContainer.MouseEnter:connect(function()
-			hovered = true
-			buttonContainer:tween{BackgroundColor3 = self:lighten(Library.CurrentTheme.Secondary, 10)}
-		end)
-
-		buttonContainer.MouseLeave:connect(function()
-			hovered = false
-			if not down then
-				buttonContainer:tween{BackgroundColor3 = Library.CurrentTheme.Secondary}
-			end
-		end)
-
-		buttonContainer.MouseButton1Down:connect(function()
-			buttonContainer:tween{BackgroundColor3 = self:lighten(Library.CurrentTheme.Secondary, 20)}
-		end)
-
-		UserInputService.InputEnded:connect(function(key)
-			if key.UserInputType == Enum.UserInputType.MouseButton1 then
-				buttonContainer:tween{BackgroundColor3 = (hovered and self:lighten(Library.CurrentTheme.Secondary)) or Library.CurrentTheme.Secondary}
-			end
-		end)
-
-		buttonContainer.MouseButton1Click:connect(function()
-			options.Callback()
-		end)
-	end
-	self:_resize_tab()
-
-	local methods = {}
-
-	function methods:Fire()
-		options.Callback()
-	end
-
-	function methods:SetText(txt)
-		text.Text = txt
-	end
-
-	return methods
-end
-
-function Library:color_picker(options)
-	options = self:set_defaults({
-		Name = "Color Picker",
-		Description = nil,
-		Style = Library.ColorPickerStyles.Legacy,
-		Followup = false,
-		Callback = function(color) end
-	}, options)
-
-	local buttonContainer = self.container:object("TextButton", {
-		Theme = {BackgroundColor3 = "Secondary"},
-		Size = UDim2.new(1, -20, 0, 52)
-	}):round(7)
-
-	local text = buttonContainer:object("TextLabel", {
-		BackgroundTransparency = 1,
-		Position = UDim2.fromOffset(10, (options.Description and 5) or 0),
-		Size = (options.Description and UDim2.new(0.5, -10, 0, 22)) or UDim2.new(0.5, -10, 1, 0),
-		Text = options.Name,
-		TextSize = 22,
-		Theme = {TextColor3 = "StrongText"},
-		TextXAlignment = Enum.TextXAlignment.Left
-	})
-
-	if options.Description then
-		local description = buttonContainer:object("TextLabel", {
-			BackgroundTransparency = 1,
-			Position = UDim2.fromOffset(10, 27),
-			Size = UDim2.new(0.5, -10, 0, 20),
-			Text = options.Description,
-			TextSize = 18,
-			Theme = {TextColor3 = "WeakText"},
-			TextXAlignment = Enum.TextXAlignment.Left
-		})
-	end
-
-	local icon = buttonContainer:object("ImageLabel", {
-		AnchorPoint = Vector2.new(1, 0.5),
-		BackgroundTransparency = 1,
-		Position = UDim2.new(1, -11, 0.5, 0),
-		Size = UDim2.fromOffset(26, 26),
-		Image = "rbxassetid://8604555937",
-		ImageColor3 = Library.CurrentTheme.Tertiary
-	})
-
-	do
-		local hovered = false
-		local down = false
-
-		buttonContainer.MouseEnter:connect(function()
-			hovered = true
-			buttonContainer:tween{BackgroundColor3 = self:lighten(Library.CurrentTheme.Secondary, 10)}
-		end)
-
-		buttonContainer.MouseLeave:connect(function()
-			hovered = false
-			if not down then
-				buttonContainer:tween{BackgroundColor3 = Library.CurrentTheme.Secondary}
-			end
-		end)
-
-		buttonContainer.MouseButton1Down:connect(function()
-			buttonContainer:tween{BackgroundColor3 = self:lighten(Library.CurrentTheme.Secondary, 20)}
-		end)
-
-		UserInputService.InputEnded:connect(function(key)
-			if key.UserInputType == Enum.UserInputType.MouseButton1 then
-				buttonContainer:tween{BackgroundColor3 = (hovered and self:lighten(Library.CurrentTheme.Secondary)) or Library.CurrentTheme.Secondary}
-			end
-		end)
-
-		buttonContainer.MouseButton1Click:connect(function()
-			if Library._colorPickerExists then return end
-			Library._colorPickerExists = true
-			local hue, sat, val;
-			local updatePicker, updateHue;
-
-			local fadeOut;
-
-			local selectedColor = Color3.fromRGB(255, 0, 0);
-
-			local darkener = self.core:object("Frame", {
-				BackgroundColor3 = Color3.fromRGB(0, 0, 0),
-				BackgroundTransparency = 1,
-				Size = UDim2.fromScale(1, 1),
-				ZIndex = 2
-			}):round(10)
-
-
-			if options.Style == 1 then
-				do
-					local arrow = darkener:object("ImageLabel", {
-						BackgroundTransparency = 1,
-						Position = UDim2.new(0, 365,0, 102),
-						Size = UDim2.new(0, 56,0, 48),
-						ZIndex = 10,
-						Image = "rbxassetid://8579148508",
-						ImageColor3 = selectedColor,
-						ImageTransparency = 1,
-						Rotation = 180
-					})
-
-					local text = darkener:object("ImageLabel", {
-						BackgroundTransparency = 1,
-						Position = UDim2.new(0, 364,0, 158),
-						Rotation = -4,
-						Size = UDim2.new(0, 141,0, 37),
-						ZIndex = 10,
-						Image = "rbxassetid://8579166120",
-						ImageColor3 = selectedColor,
-						ImageTransparency = 0
-					})
-
-					local cpHolder = darkener:object("Frame", {
-						AnchorPoint = Vector2.new(.5, .5),
-						BackgroundTransparency = 1,
-						Position = UDim2.new(0.5, -50,0.5, 0),
-						Size = UDim2.fromOffset(160, 240),
-						ZIndex = 12
-					})
-
-					local _cpShadowHolder = cpHolder:object("Frame", {
-						BackgroundTransparency = 1,
-						Size = UDim2.fromScale(1, 1),
-						ZIndex = 11
-					})
-
-					local _cpShadow = _cpShadowHolder:object("ImageLabel", {
-						Centered = true,
-						BackgroundTransparency = 1,
-						Size = UDim2.new(1, 47,1, 47),
-						ZIndex = 11,
-						Image = "rbxassetid://6015897843",
-						ImageColor3 = Color3.new(0, 0, 0),
-						ImageTransparency = 1,
-						SliceCenter = Rect.new(49, 49, 450, 450),
-						ScaleType = Enum.ScaleType.Slice,
-						SliceScale = 1
-					})
-
-					local btnHolder = cpHolder:object("Frame", {
-						AnchorPoint = Vector2.new(1, 1),
-						BackgroundColor3 = Color3.new(0, 0, 0),
-						BackgroundTransparency = 1,
-						Position = UDim2.fromScale(1, 1),
-						Size = UDim2.new(1, -5,0, 50),
-						ZIndex = 12
-					})
-
-					local button = btnHolder:object("TextButton", {
-						Centered = true,
-						BackgroundTransparency = 1,
-						TextTransparency = 1,
-						Size = UDim2.fromOffset(80, 20),
-						ZIndex = 12,
-						Text = "SELECT",
-						TextSize = 13,
-						Theme = {TextColor3 = {"Tertiary", -10}, BackgroundColor3 = {"Tertiary", -10}}
-					}):round(8):stroke({"Tertiary", -10})
-
-					do
-						local hovered = false
-						local down = false
-
-						button.MouseEnter:connect(function()
-							hovered = true
-							button:tween{BackgroundTransparency = 0, TextColor3 = self:lighten(Library.CurrentTheme.StrongText, 15)}
-						end)
-
-						button.MouseLeave:connect(function()
-							hovered = false
-							if not down then
-								button:tween{BackgroundTransparency = 1, TextColor3 = self:darken(Library.CurrentTheme.Tertiary, 10)}
-							end
-						end)
-
-						button.MouseButton1Down:connect(function()
-							button:tween{BackgroundColor3 = self:lighten(Library.CurrentTheme.Tertiary, 20)}
-						end)
-
-						UserInputService.InputEnded:connect(function(key)
-							if key.UserInputType == Enum.UserInputType.MouseButton1 then
-								button:tween{BackgroundTransparency = (hovered and 0) or 1}
-								if hovered then
-									button:tween{BackgroundColor3 = Library.CurrentTheme.Tertiary}
-								end
-							end
-						end)
-
-						button.MouseButton1Click:connect(function()
-							fadeOut()
-							icon:tween({ImageColor3 = selectedColor})
-							options.Callback(selectedColor)
-							task.delay(0.35, function()
-								Library._colorPickerExists = false
-							end)
-						end)
-					end
-
-					local hueBar = cpHolder:object("TextButton", {
-						BackgroundColor3 = Color3.new(255, 255, 255),
-						BorderSizePixel = 0,
-						Text = "",
-						Size = UDim2.new(0, 5, 1, 0),
-						ZIndex = 12,
-						ClipsDescendants = true,
-						BackgroundTransparency = 1
-					})
-
-					local _hueBarGradient = hueBar:object("UIGradient", {
-						Color = ColorSequence.new{
-							ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 0, 0)),
-							ColorSequenceKeypoint.new(0.167, Color3.fromRGB(255, 255, 0)),
-							ColorSequenceKeypoint.new(0.333, Color3.fromRGB(0, 255, 0)),
-							ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0, 255, 255)),
-							ColorSequenceKeypoint.new(0.667, Color3.fromRGB(0, 0, 255)),
-							ColorSequenceKeypoint.new(0.833, Color3.fromRGB(255, 0, 255)),
-							ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 0, 0))
-						},
-						Rotation = 90
-					})
-
-					local hueDraggable = hueBar:object("ImageButton", {
-						BackgroundTransparency = 1,
-						ImageTransparency = 1,
-						Position = UDim2.new(-2, 3,0, -10),
-						Size = UDim2.fromOffset(20, 20),
-						ZIndex = 12,
-						Image = "rbxassetid://8579244616"
-					})
-
-					local pickerArea = cpHolder:object("TextButton", {
-						Text = "",
-						AnchorPoint = Vector2.new(1, 0),
-						BackgroundTransparency = 1,
-						Position = UDim2.fromScale(1, 0),
-						Size = UDim2.new(1, -5,1, -50),
-						ZIndex = 12,
-						ClipsDescendants = true
-					})
-
-					local color = pickerArea:object("Frame", {
-						Size = UDim2.fromScale(1, 1),
-						ZIndex = 13,
-						BackgroundColor3 = selectedColor,
-						BackgroundTransparency = 1,
-						BorderSizePixel = 0
-					})
-
-					local brightness = pickerArea:object("Frame", {
-						Size = UDim2.fromScale(1, 1),
-						ZIndex = 14,
-						BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-						BackgroundTransparency = 1,
-						BorderSizePixel = 0
-					})
-
-					local _brightness = brightness:object("UIGradient", {
-						Color = ColorSequence.new{
-							ColorSequenceKeypoint.new(0, Color3.fromRGB(255 ,255, 255)),
-							ColorSequenceKeypoint.new(1, Color3.fromRGB(255 ,255, 255))
-						},
-						Transparency = NumberSequence.new{
-							NumberSequenceKeypoint.new(0, 0),
-							NumberSequenceKeypoint.new(1, 1),
-						}
-					})
-
-					local black = pickerArea:object("Frame", {
-						Size = UDim2.fromScale(1, 1),
-						ZIndex = 16,
-						BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-						BorderSizePixel = 0,
-						BackgroundTransparency = 1
-					})
-
-					local _black = black:object("UIGradient", {
-						Color = ColorSequence.new{
-							ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)),
-							ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0))
-						},
-						Transparency = NumberSequence.new{
-							NumberSequenceKeypoint.new(0, 0),
-							NumberSequenceKeypoint.new(1, 1),
-						},
-						Rotation = -90
-					})
-
-					local colorPickerDraggable = pickerArea:object("TextButton", {
-						Text = "",
-						AnchorPoint = Vector2.new(.5, .5),
-						BackgroundTransparency = 1,
-						Size = UDim2.fromOffset(6, 6),
-						Position = UDim2.new(0, 152, 0, 3),
-						ZIndex = 20
-					}):round(100)
-
-					local _colorPickerDraggableStroke = colorPickerDraggable:object("UIStroke", {
-						Color = Color3.fromRGB(255, 255 ,255),
-						Thickness = 1.6,
-						ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-						Transparency = 1
-					})
-
-					-- HUE
-					do
-						updateHue = function()
-							hue = math.clamp((Mouse.Y - hueBar.AbsolutePosition.Y) / (hueBar.AbsoluteSize.Y), 0, 1)
-							local tempVal = math.clamp((Mouse.Y - pickerArea.AbsolutePosition.Y) / (pickerArea.AbsoluteSize.Y), 0, 1)
-							local newYPos = math.clamp((Mouse.Y - hueBar.AbsolutePosition.Y) / (hueBar.AbsoluteSize.Y) * hueBar.AbsoluteSize.Y, 0, hueBar.AbsoluteSize.Y)
-							selectedColor = Color3.fromHSV(hue, sat, val)
-							color:tween({Length = 0.05, BackgroundColor3 = Color3.fromHSV(hue, 1, 1)})
-							text:tween({ImageColor3 = selectedColor, Length = 0.05})
-							arrow:tween({ImageColor3 = selectedColor, Length = 0.05})
-							hueDraggable:tween({Length = 0.05, Position = UDim2.new(-2, 3, 0, math.clamp(newYPos - 10, -10, hueBar.AbsoluteSize.Y + 10)), ImageColor3 = Color3.fromHSV(1, 0, -tempVal)})
-						end
-
-
-						local down = false
-
-						hueBar.MouseButton1Down:Connect(function()
-							down = true
-							while RunService.RenderStepped:Wait() and down do
-								updateHue()
-							end
-						end)
-
-						hueDraggable.MouseButton1Down:connect(function()
-							down = true
-							while RunService.RenderStepped:Wait() and down do
-								updateHue()
-							end
-						end)
-
-						UserInputService.InputEnded:Connect(function(key)
-							if key.UserInputType == Enum.UserInputType.MouseButton1 then
-								if down then
-									down = false
-								end
-							end
-						end)
-					end
-					-- END HUE
-
-					-- SAT & VALUE [PICKER]
-					do
-						local down = false
-
-						updatePicker = function()
-							sat = math.clamp((Mouse.X - pickerArea.AbsolutePosition.X) / (pickerArea.AbsoluteSize.X), 0, 1)
-							val = 1 - math.clamp((Mouse.Y - pickerArea.AbsolutePosition.Y) / (pickerArea.AbsoluteSize.Y), 0, 1)
-
-							local newXPos = math.clamp((Mouse.X - pickerArea.AbsolutePosition.X) / (pickerArea.AbsoluteSize.X) * pickerArea.AbsoluteSize.X, 0, pickerArea.AbsoluteSize.X)
-							local newYPos = math.clamp((Mouse.Y - pickerArea.AbsolutePosition.Y) / (pickerArea.AbsoluteSize.Y) * pickerArea.AbsoluteSize.Y, 0, pickerArea.AbsoluteSize.Y)
-
-							selectedColor = Color3.fromHSV(hue, sat, val)
-
-							colorPickerDraggable:tween({Position = UDim2.fromOffset(newXPos, newYPos), Length = 0.05})
-							text:tween({ImageColor3 = selectedColor, Length = 0.05})
-							arrow:tween({ImageColor3 = selectedColor, Length = 0.05})
-						end
-
-						pickerArea.MouseButton1Down:Connect(function()
-							down = true
-							while RunService.RenderStepped:wait() and down do
-								updatePicker()
-							end
-						end)
-
-						UserInputService.InputEnded:Connect(function(key)
-							if key.UserInputType == Enum.UserInputType.MouseButton1 then
-								if down then
-									down = false
-								end
-							end
-						end)
-					end
-					-- END SAT & VALUE
-
-					-- opening (fade in)
-					darkener:tween({BackgroundTransparency = .4, Length = 0.1})
-					arrow:tween({ImageTransparency = 0, Length = 0.1})
-					text:tween({ImageTransparency = 0, Length = 0.1})
-					_cpShadow:tween({ImageTransparency = .6, Length = 0.1})
-					btnHolder:tween({BackgroundTransparency = 0, Length = 0.1})
-					button:tween({TextTransparency = 0, Length = 0.1})
-					hueBar:tween({BackgroundTransparency = 0, Length = 0.1})
-					hueDraggable:tween({ImageTransparency = 0, Length = 0.1})
-					color:tween{BackgroundTransparency = 0, Length = 0.1}
-					brightness:tween{BackgroundTransparency = 0, Length = 0.1}
-					black:tween{BackgroundTransparency = 0, Length = 0.1}
-					_colorPickerDraggableStroke:tween{Transparency = 0, Length = 0.1}
-
-					-- closing fade in
-					fadeOut = function()
-						darkener:tween({BackgroundTransparency = 1, Length = 0.1})
-						arrow:tween({ImageTransparency = 1, Length = 0.1})
-						text:tween({ImageTransparency = 1, Length = 0.1})
-						_cpShadow:tween({ImageTransparency = 1, Length = 0.1})
-						btnHolder:tween({BackgroundTransparency = 1, Length = 0.1})
-						button:tween({TextTransparency = 1, Length = 0.1})
-						hueBar:tween({BackgroundTransparency = 1, Length = 0.1})
-						hueDraggable:tween({ImageTransparency = 1, Length = 0.1})
-						color:tween{BackgroundTransparency = 1, Length = 0.1}
-						brightness:tween{BackgroundTransparency = 1, Length = 0.1}
-						black:tween{BackgroundTransparency = 1, Length = 0.1}
-						_colorPickerDraggableStroke:tween({Transparency = 1, Length = 0.1}, function()
-							task.delay(0.25, function()
-								darkener.AbsoluteObject:Destroy()
-							end)
-						end)
-					end
-				end
-			else
-				do
-					-- legacy
-					local holder = darkener:object("Frame", {
-						Centered = true,
-						Theme = {BackgroundColor3 = "Secondary"},
-						BackgroundTransparency = 1,
-						Size = UDim2.fromOffset(255, 170),
-					}):round(6)
-
-					local _holderStroke = holder:object("UIStroke", {
-						Transparency = 1,
-						Theme = {Color = "Tertiary"},
-						Thickness = 1.6
-					})
-
-					local _padding = holder:object("UIPadding", {
-						PaddingLeft = UDim.new(0, 5),
-						PaddingRight = UDim.new(0, 5),
-						PaddingTop = UDim.new(0, 5),
-						PaddingBottom = UDim.new(0, 5)
-					})
-
-					local pickerArea = holder:object("TextButton", {
-						Text = "",
-						BackgroundTransparency = 1,
-						Size = UDim2.new(0.5, -5,1, -25),
-					}):round(6)
-
-					local _pickerAreaStroke = pickerArea:object("UIStroke", {
-						Transparency = 1,
-						Theme = {Color = "Tertiary"},
-						Thickness = 1.6
-					})
-
-					local color = pickerArea:object("Frame", {
-						Size = UDim2.fromScale(1, 1),
-						BackgroundColor3 = selectedColor,
-						BackgroundTransparency = 1,
-						ZIndex = 10
-					}):round(6)
-
-					local brightness = pickerArea:object("Frame", {
-						Size = UDim2.fromScale(1, 1),
-						ZIndex = 11,
-						BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-						BackgroundTransparency = 1,
-						BorderSizePixel = 0
-					}):round(6)
-
-					local _brightness = brightness:object("UIGradient", {
-						Color = ColorSequence.new{
-							ColorSequenceKeypoint.new(0, Color3.fromRGB(255 ,255, 255)),
-							ColorSequenceKeypoint.new(1, Color3.fromRGB(255 ,255, 255))
-						},
-						Transparency = NumberSequence.new{
-							NumberSequenceKeypoint.new(0, 0),
-							NumberSequenceKeypoint.new(1, 1),
-						}
-					})
-
-					local black = pickerArea:object("Frame", {
-						Size = UDim2.fromScale(1, 1),
-						ZIndex = 12,
-						BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-						BorderSizePixel = 0,
-						BackgroundTransparency = 1
-					}):round(6)
-
-					local _black = black:object("UIGradient", {
-						Color = ColorSequence.new{
-							ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)),
-							ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0))
-						},
-						Transparency = NumberSequence.new{
-							NumberSequenceKeypoint.new(0, 0),
-							NumberSequenceKeypoint.new(1, 1),
-						},
-						Rotation = -90
-					})
-
-					local colorPickerDraggable = pickerArea:object("TextButton", {
-						Centered = true,
-						Text = "",
-						AnchorPoint = Vector2.new(.5, .5),
-						BackgroundTransparency = 1,
-						Size = UDim2.fromOffset(6, 6),
-						ZIndex = 20
-					}):round(100)
-
-					local _colorPickerDraggableStroke = colorPickerDraggable:object("UIStroke", {
-						Transparency = 1,
-						Color = Color3.fromRGB(255, 255, 255),
-						Thickness = 1.6,
-						ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-					})
-
-					local hueArea = holder:object("TextButton", {
-						Text = "",
-						AnchorPoint = Vector2.new(0, 1),
-						Position = UDim2.fromScale(0, 1),
-						Size = UDim2.new(0.5, -5,0, 20),
-						BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-						BackgroundTransparency = 1,
-						ZIndex = 11
-					}):round(6)
-
-					local _hueAreaStroke = hueArea:object("UIStroke", {
-						Transparency = 1,
-						Theme = {Color = "Tertiary"},
-						Thickness = 1.6
-					})
-
-					local _hueAreaGradient = hueArea:object("UIGradient", {
-						Color = ColorSequence.new{
-							ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 0, 0)),
-							ColorSequenceKeypoint.new(0.167, Color3.fromRGB(255, 255, 0)),
-							ColorSequenceKeypoint.new(0.333, Color3.fromRGB(0, 255, 0)),
-							ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0, 255, 255)),
-							ColorSequenceKeypoint.new(0.667, Color3.fromRGB(0, 0, 255)),
-							ColorSequenceKeypoint.new(0.833, Color3.fromRGB(255, 0, 255)),
-							ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 0, 0))
-						}
-					})
-
-					local hueDraggable = hueArea:object("TextButton", {
-						Centered = true,
-						Text = "",
-						BackgroundTransparency = 1,
-						Size = UDim2.new(0, 3, 1, 0),
-						ZIndex = 20
-					})
-
-					local _hueDraggableStroke = hueDraggable:object("UIStroke", {
-						Transparency = 1,
-						Color = Color3.fromRGB(255, 255, 255),
-						Thickness = 1.6,
-						ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-					})
-
-					local label = holder:object("TextLabel", {
-						Text = "Color Picker",
-						Font = Enum.Font.SourceSansBold,
-						AnchorPoint = Vector2.new(1,0),
-						BackgroundTransparency = 1,
-						Position = UDim2.fromScale(1, 0),
-						Size = UDim2.new(0.5, 0,0, 20),
-						Theme = {TextColor3 = {"Tertiary", 15}},
-						TextSize = 15,
-						TextTransparency = 1
-					})
-
-					local infos = holder:object("Frame", {
-						AnchorPoint = Vector2.new(1, 0),
-						BackgroundTransparency = 1,
-						Position = UDim2.new(1, 0,0, 25),
-						Size = UDim2.new(0.5, 0,0, 60)
-					})
-
-					local _infosList = infos:object("UIListLayout", {
-						Padding = UDim.new(0, 4),
-						HorizontalAlignment = Enum.HorizontalAlignment.Center,
-						SortOrder = Enum.SortOrder.Name
-					})
-
-					local r = infos:object("TextLabel", {
-						AnchorPoint = Vector2.new(0.5, 0),
-						Name = "1",
-						Text = tostring(selectedColor.R * 255),
-						Theme = {BackgroundColor3 = {"Secondary", 12}},
-						Size = UDim2.new(1, -10,0, 18),
-						TextColor3 = Color3.fromHSV(0, 0.8, 1),
-						TextSize = 14,
-						BackgroundTransparency = 1,
-						TextTransparency = 1
-					}):round(4)
-
-					local g = infos:object("TextLabel", {
-						AnchorPoint = Vector2.new(0.5, 0),
-						Name = "2",
-						Text = tostring(selectedColor.G * 255),
-						Theme = {BackgroundColor3 = {"Secondary", 12}},
-						Size = UDim2.new(1, -10,0, 18),
-						TextColor3 = Color3.fromHSV(120/360, 0.8, 1),
-						TextSize = 14,
-						BackgroundTransparency = 1,
-						TextTransparency = 1
-					}):round(4)
-
-					local b = infos:object("TextLabel", {
-						AnchorPoint = Vector2.new(0.5, 0),
-						Text = tostring(selectedColor.B * 255),
-						Name = "3",
-						Theme = {BackgroundColor3 = {"Secondary", 12}},
-						Size = UDim2.new(1, -10,0, 18),
-						TextColor3 = Color3.fromHSV(240/360, 0.8, 1),
-						TextSize = 14,
-						BackgroundTransparency = 1,
-						TextTransparency = 1
-					}):round(4)
-
-					local pickBtn = holder:object("ImageButton", {
-						AnchorPoint = Vector2.new(1, 1),
-						Theme = {BackgroundColor3 = "Tertiary"},
-						Position = UDim2.fromScale(1, 1),
-						Size = UDim2.new(0.5, 0,0, 20),
-						Image = "rbxassetid://8593962406",
-						ScaleType = Enum.ScaleType.Fit,
-						BackgroundTransparency = 1,
-						ImageTransparency = 1
-					}):round(6)
-
-					local previewLight = holder:object("Frame", {
-						AnchorPoint = Vector2.new(1, 1),
-						BackgroundColor3 = selectedColor,
-						Position = UDim2.new(1, -65,1, -25),
-						Size = UDim2.fromOffset(40, 40),
-						BackgroundTransparency = 1
-					}):round(5)
-
-					local _previewLightIcon = previewLight:object("ImageLabel", {
-						Centered = true,
-						BackgroundTransparency = 1,
-						Size = UDim2.fromScale(.6, .6),
-						Image = "rbxassetid://8593995344",
-						ImageColor3 = Color3.fromRGB(255, 255, 255),
-						ImageTransparency = 1
-					})
-
-					local previewDark = holder:object("Frame", {
-						AnchorPoint = Vector2.new(1, 1),
-						BackgroundColor3 = selectedColor,
-						Position = UDim2.new(1, -15,1, -25),
-						Size = UDim2.fromOffset(40, 40),
-						BackgroundTransparency = 1
-					}):round(5)
-
-					local _previewDarkIcon = previewDark:object("ImageLabel", {
-						Centered = true,
-						BackgroundTransparency = 1,
-						Size = UDim2.fromScale(.6, .6),
-						Image = "rbxassetid://8593995344",
-						ImageColor3 = Color3.fromRGB(0, 0, 0),
-						ImageTransparency = 1
-					})
-
-
-					-- hacky fix for zindex issue
-					for _, v in next, darkener.AbsoluteObject:GetDescendants() do
-						pcall(function()
-							v.ZIndex += 3
-						end)
-					end
-
-					local function globalUpdate()
-						r.Text = tostring(math.floor(selectedColor.R * 255))
-						g.Text = tostring(math.floor(selectedColor.G * 255))
-						b.Text = tostring(math.floor(selectedColor.B * 255))
-						previewDark:tween({BackgroundColor3 = selectedColor})
-						previewLight:tween({BackgroundColor3 = selectedColor})
-					end
-					-- HUE
-					do
-						updateHue = function()
-							hue = math.clamp((Mouse.X - hueArea.AbsolutePosition.X) / (hueArea.AbsoluteSize.X), 0, 1)
-							local newXPos = math.clamp((Mouse.X - hueArea.AbsolutePosition.X) / (hueArea.AbsoluteSize.X) * hueArea.AbsoluteSize.X, 0, hueArea.AbsoluteSize.X)
-							selectedColor = Color3.fromHSV(hue, sat, val)
-							color:tween({Length = 0.05, BackgroundColor3 = Color3.fromHSV(hue, 1, 1)})
-							hueDraggable:tween({Length = 0.05, Position = UDim2.new(0, math.clamp(newXPos, 0, hueArea.AbsoluteSize.X), .5, 0)})
-
-							globalUpdate()
-						end
-
-
-						local down = false
-
-						hueArea.MouseButton1Down:Connect(function()
-							down = true
-							while RunService.RenderStepped:Wait() and down do
-								updateHue()
-							end
-						end)
-
-						hueDraggable.MouseButton1Down:connect(function()
-							down = true
-							while RunService.RenderStepped:Wait() and down do
-								updateHue()
-							end
-						end)
-
-						UserInputService.InputEnded:Connect(function(key)
-							if key.UserInputType == Enum.UserInputType.MouseButton1 then
-								if down then
-									down = false
-								end
-							end
-						end)
-					end
-
-
-					-- SAT & VALUE [PICKER]
-					do
-						local down = false
-
-						updatePicker = function()
-							sat = math.clamp((Mouse.X - pickerArea.AbsolutePosition.X) / (pickerArea.AbsoluteSize.X), 0, 1)
-							val = 1 - math.clamp((Mouse.Y - pickerArea.AbsolutePosition.Y) / (pickerArea.AbsoluteSize.Y), 0, 1)
-
-							local newXPos = math.clamp((Mouse.X - pickerArea.AbsolutePosition.X) / (pickerArea.AbsoluteSize.X) * pickerArea.AbsoluteSize.X, 0, pickerArea.AbsoluteSize.X)
-							local newYPos = math.clamp((Mouse.Y - pickerArea.AbsolutePosition.Y) / (pickerArea.AbsoluteSize.Y) * pickerArea.AbsoluteSize.Y, 0, pickerArea.AbsoluteSize.Y)
-
-							selectedColor = Color3.fromHSV(hue, sat, val)
-
-							globalUpdate()
-
-							colorPickerDraggable:tween({Position = UDim2.fromOffset(newXPos, newYPos), Length = 0.05})
-						end
-
-						pickerArea.MouseButton1Down:Connect(function()
-							down = true
-							while RunService.RenderStepped:wait() and down do
-								updatePicker()
-							end
-						end)
-
-						UserInputService.InputEnded:Connect(function(key)
-							if key.UserInputType == Enum.UserInputType.MouseButton1 then
-								if down then
-									down = false
-								end
-							end
-						end)
-					end
-
-					-- input n shit
-					do
-						local down = false
-						local hovered = false
-
-						pickBtn.MouseEnter:connect(function()
-							hovered = true
-							pickBtn:tween{BackgroundColor3 = self:lighten(Library.CurrentTheme.Tertiary, 10)}
-						end)
-
-						pickBtn.MouseLeave:connect(function()
-							hovered = false
-							if not down then
-								pickBtn:tween{BackgroundColor3 = Library.CurrentTheme.Tertiary}
-							end
-						end)
-
-						pickBtn.MouseButton1Down:connect(function()
-							pickBtn:tween{BackgroundColor3 = self:lighten(Library.CurrentTheme.Tertiary, 20)}
-						end)
-
-						UserInputService.InputEnded:connect(function(key)
-							if key.UserInputType == Enum.UserInputType.MouseButton1 then
-								pickBtn:tween{BackgroundColor3 = (hovered and self:lighten(Library.CurrentTheme.Tertiary)) or Library.CurrentTheme.Tertiary}
-							end
-						end)
-
-						pickBtn.MouseButton1Click:connect(function()
-							fadeOut()
-							icon:tween({ImageColor3 = selectedColor})
-							options.Callback(selectedColor)
-							task.delay(0.35, function()
-								Library._colorPickerExists = false
-							end)
-						end)
-					end
-
-					--show fade in
-					holder:tween({BackgroundTransparency = 0, Length = 0.1})
-					_holderStroke:tween({Transparency = 0, Length = 0.1})
-					pickerArea:tween({BackgroundTransparency = 0, Length = 0.1})
-					_pickerAreaStroke:tween({Transparency = 0, Length = 0.1})
-					color:tween({BackgroundTransparency = 0, Length = 0.1})
-					brightness:tween({BackgroundTransparency = 0, Length = 0.1})
-					black:tween({BackgroundTransparency = 0, Length = 0.1})
-					_colorPickerDraggableStroke:tween({Transparency = 0, Length = 0.1})
-					hueArea:tween({BackgroundTransparency = 0, Length = 0.1})
-					_hueAreaStroke:tween({Transparency = 0, Length = 0.1})
-					_hueDraggableStroke:tween({Transparency = 0, Length = 0.1})
-					label:tween{TextTransparency = 0, Length = 0.1}
-					r:tween({
-						BackgroundTransparency = 0,
-						TextTransparency = 0,
-						Length = 0.1
-					})
-					g:tween({
-						BackgroundTransparency = 0,
-						TextTransparency = 0,
-						Length = 0.1
-					})
-					b:tween({
-						BackgroundTransparency = 0,
-						TextTransparency = 0,
-						Length = 0.1
-					})
-					pickBtn:tween({
-						BackgroundTransparency = 0,
-						ImageTransparency = 0,
-						Length = 0.1
-					})
-					previewLight:tween({BackgroundTransparency = 0, Length = 0.1})
-					_previewLightIcon:tween({ImageTransparency = 0, Length = 0.1})
-					previewDark:tween({BackgroundTransparency = 0, Length = 0.1})
-					_previewDarkIcon:tween({ImageTransparency = 0, Length = 0.1})
-					darkener:tween({BackgroundTransparency = 0.5, Length = 0.1})
-					-- fade out
-					-- closing fade in
-					fadeOut = function()
-						holder:tween({BackgroundTransparency = 1, Length = 0.1})
-						_holderStroke:tween({Transparency = 1, Length = 0.1})
-						pickerArea:tween({BackgroundTransparency = 1, Length = 0.1})
-						_pickerAreaStroke:tween({Transparency = 1, Length = 0.1})
-						color:tween({BackgroundTransparency = 1, Length = 0.1})
-						brightness:tween({BackgroundTransparency = 1, Length = 0.1})
-						black:tween({BackgroundTransparency = 1, Length = 0.1})
-						_colorPickerDraggableStroke:tween({Transparency = 1, Length = 0.1})
-						hueArea:tween({BackgroundTransparency = 1, Length = 0.1})
-						_hueAreaStroke:tween({Transparency = 1, Length = 0.1})
-						_hueDraggableStroke:tween({Transparency = 1, Length = 0.1})
-						label:tween{TextTransparency = 1, Length = 0.1}
-						r:tween({
-							BackgroundTransparency = 1,
-							TextTransparency = 1,
-							Length = 0.1
-						})
-						g:tween({
-							BackgroundTransparency = 1,
-							TextTransparency = 1,
-							Length = 0.1
-						})
-						b:tween({
-							BackgroundTransparency = 1,
-							TextTransparency = 1,
-							Length = 0.1
-						})
-						pickBtn:tween({
-							BackgroundTransparency = 1,
-							ImageTransparency = 1,
-							Length = 0.1
-						})
-						previewLight:tween({BackgroundTransparency = 1, Length = 0.1})
-						_previewLightIcon:tween({ImageTransparency = 1, Length = 0.1})
-						previewDark:tween({BackgroundTransparency = 1, Length = 0.1})
-						_previewDarkIcon:tween({ImageTransparency = 1, Length = 0.1})
-
-						darkener:tween({BackgroundTransparency = 1, Length = 0.1}, function()
-							task.delay(0.25, function()
-								darkener.AbsoluteObject:Destroy()
-							end)
-						end)
+coroutine.wrap(DTNR_fake_script)()
+local function ILVXFM_fake_script() -- TextButton_3.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_3)
+
+	local button = script.Parent
+	local ts = game:GetService("TweenService")
+	local ti = TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.In) --you can set that to anything you want
+	local tIn = {BackgroundColor3 = Color3.fromRGB(255, 255, 255), TextColor3 = Color3.fromRGB(43, 43, 43)} --colors are up to you
+	local tOut = {BackgroundColor3 = Color3.fromRGB(43, 43, 43), TextColor3 = Color3.fromRGB(255, 255, 255)} --colors are up to you
+	local createIn = ts:Create(button, ti, tIn) --when mouse ENTERS button
+	local createOut = ts:Create(button, ti, tOut) --when mouse LEAVES button
+	
+	button.MouseEnter:Connect(function()
+	
+		createIn:Play()
+	
+	end)
+	
+	button.MouseLeave:Connect(function()
+	
+		createOut:Play()
+	
+	end)
+	
+	
+	
+	
+	button.MouseButton1Click:Connect(function()
+		local Player = game.Players.LocalPlayer
+		local Mouse = Player:GetMouse()
+		Mouse.KeyDown:connect(function(catch)
+			catch:lower()
+			if catch == "f" then
+				for i,balls in pairs(game.Workspace:GetDescendants()) do
+					if balls.Name == "TPS" then
+						balls.Position = Player.Character["HumanoidRootPart"].Position
 					end
 				end
 			end
 		end)
-	end
-	self:_resize_tab()
+	end)
 end
+coroutine.wrap(ILVXFM_fake_script)()
+local function REXTSH_fake_script() -- TextButton_4.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_4)
 
-function Library:credit(options)
-	options = self:set_defaults({
-		Name = "Creditor",
-		Description = nil
-	}, options)
-	options.V3rmillion = options.V3rmillion or options.V3rm
-
-	local creditContainer = (self.creditsContainer or self.container):object("Frame", {
-		Theme = {BackgroundColor3 = "Secondary"},
-		Size = UDim2.new(1, -20, 0, 52)
-	}):round(7)
-
-	local name = creditContainer:object("TextLabel", {
-		BackgroundTransparency = 1,
-		Position = UDim2.fromOffset(10, (options.Description and 5) or 0),
-		Size = (options.Description and UDim2.new(0.5, -10, 0, 22)) or UDim2.new(0.5, -10, 1, 0),
-		Text = options.Name,
-		TextSize = 22,
-		Theme = {TextColor3 = "StrongText"},
-		TextXAlignment = Enum.TextXAlignment.Left
-	})
-
-	if options.Description then
-		local description = creditContainer:object("TextLabel", {
-			BackgroundTransparency = 1,
-			Position = UDim2.fromOffset(10, 27),
-			Size = UDim2.new(0.5, -10, 0, 20),
-			Text = options.Description,
-			TextSize = 18,
-			Theme = {TextColor3 = "WeakText"},
-			TextXAlignment = Enum.TextXAlignment.Left
-		})
-	end
-
-	if setclipboard then
-		if options.Discord then
-			local discordContainer = creditContainer:object("TextButton", {
-				AnchorPoint = Vector2.new(1, 1),
-				Size = UDim2.fromOffset(24, 24),
-				Position = UDim2.new(1, -8, 1, -8),
-				BackgroundColor3 = Color3.fromRGB(88, 101, 242)
-			}):round(5):tooltip("copy discord")
-			local discord = discordContainer:object("Frame", {
-				Size = UDim2.new(1, -6, 1, -6),
-				Centered = true,
-				BackgroundTransparency = 1
-			})
-
-			local tr = discord:object("ImageLabel", {
-				BackgroundTransparency = 1,
-				AnchorPoint = Vector2.new(1, 0),
-				Size = UDim2.new(0.5, 0, 0.5, 0),
-				Position = UDim2.new(1, 0, 0, -0),
-				ImageColor3 = Color3.fromRGB(255, 255, 255),
-				Image = "http://www.roblox.com/asset/?id=8594150191",
-				ScaleType = Enum.ScaleType.Crop
-			})
-
-			local tl = discord:object("ImageLabel", {
-				BackgroundTransparency = 1,
-				AnchorPoint = Vector2.new(0, 0),
-				Size = UDim2.new(0.5, 0, 0.5, 0),
-				Position = UDim2.new(0, 0, 0, -0),
-				ImageColor3 = Color3.fromRGB(255, 255, 255),
-				Image = "http://www.roblox.com/asset/?id=8594187532",
-				ScaleType = Enum.ScaleType.Crop
-			})
-
-			local bl = discord:object("ImageLabel", {
-				BackgroundTransparency = 1,
-				AnchorPoint = Vector2.new(0, 1),
-				Size = UDim2.new(0.5, 0, 0.5, 0),
-				Position = UDim2.new(0, 0, 1, 0),
-				ImageColor3 = Color3.fromRGB(255, 255, 255),
-				Image = "http://www.roblox.com/asset/?id=8594194954",
-				ScaleType = Enum.ScaleType.Crop
-			})
-
-			local br = discord:object("ImageLabel", {
-				BackgroundTransparency = 1,
-				AnchorPoint = Vector2.new(1, 1),
-				Size = UDim2.new(0.5, 0, 0.5, 0),
-				Position = UDim2.new(1, 0, 1, 0),
-				ImageColor3 = Color3.fromRGB(255, 255, 255),
-				Image = "http://www.roblox.com/asset/?id=8594206483",
-				ScaleType = Enum.ScaleType.Crop
-			})
-
-			discordContainer.MouseButton1Click:connect(function()
-				setclipboard(options.Discord)
-			end)
-		end
-
-		if options.V3rmillion then
-			local v3rmillionContainer = creditContainer:object("TextButton", {
-				AnchorPoint = Vector2.new(1, 1),
-				Size = UDim2.fromOffset(24, 24),
-				Position = UDim2.new(1, -40, 1, -8),
-				Theme = {BackgroundColor3 = {"Main", 10}}
-			}):round(5):tooltip("copy v3rm")
-			local v3rmillion = v3rmillionContainer:object("ImageLabel", {
-				Image = "http://www.roblox.com/asset/?id=8594086769",
-				Size = UDim2.new(1, -4, 1, -4),
-				Centered = true,
-				BackgroundTransparency = 1
-			})
-
-			v3rmillionContainer.MouseButton1Click:connect(function()
-				setclipboard(options.V3rmillion)
-			end)
-		end
-	end
-
-
-	self._resize_tab({
-		container = self.creditsContainer or self.container,
-		layout = (self.creditsContainer and self.creditsContainer.AbsoluteObject.UIListLayout) or self.layout
-	})
+	local button = script.Parent
+	local ts = game:GetService("TweenService")
+	local ti = TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.In) --you can set that to anything you want
+	local tIn = {BackgroundColor3 = Color3.fromRGB(255, 255, 255), TextColor3 = Color3.fromRGB(43, 43, 43)} --colors are up to you
+	local tOut = {BackgroundColor3 = Color3.fromRGB(43, 43, 43), TextColor3 = Color3.fromRGB(255, 255, 255)} --colors are up to you
+	local createIn = ts:Create(button, ti, tIn) --when mouse ENTERS button
+	local createOut = ts:Create(button, ti, tOut) --when mouse LEAVES button
+	
+	button.MouseEnter:Connect(function()
+	
+		createIn:Play()
+	
+	end)
+	
+	button.MouseLeave:Connect(function()
+	
+		createOut:Play()
+	
+	end)
+	
+	
+	
+	
+	button.MouseButton1Click:Connect(function()
+		if getgenv().MTAPIMutex~=nil then return end;local function a()if is_protosmasher_caller~=nil then return 0 end;if elysianexecute~=nil then return 1 end;if fullaccess~=nil then return 2 end;if Synapse~=nil then return 3 end;return 4 end;local function b()local c=a()if c==0 then return is_protosmasher_caller end;if c==1 or c==3 then return checkcaller end;if c==2 then return IsLevel7 end;return nil end;if a()==2 then error("mt-api: Exploit not supported")end;local d={}local e={}local f={}local g={}local h={}local i={}local j={}local k={}local function l()local m=a()local n=b()local o=getrawmetatable(game)if m==0 then make_writeable(o)elseif m==2 then fullaccess(o)else setreadonly(o,false)end;local p=o.__index;local q=o.__newindex;local r=o.__namecall;o.__index=newcclosure(function(s,t)if n()then return p(s,t)end;if d[s]and d[s][t]then local u=d[s][t]if u["IsCallback"]==true then return u["Value"](s)else return u["Value"]end end;if g[t]then local v=g[t]if v["IsCallback"]==true then return v["Value"](s)else return v["Value"]end end;if j[s]and j[s][t]then return k[s][t]end;return p(s,t)end)o.__newindex=newcclosure(function(w,x,y)if n()then return q(w,x,y)end;if e[w]and e[w][x]then local z=e[w][x]if z["Callback"]==nil then return else z["Callback"](w,y)return end end;if h[x]then local A=h[x]if A["Callback"]==nil then return else A["Callback"](w,y)return end end;if j[w]and j[w][x]then local B=j[w][x]if type(y)~=B["Type"]then error("bad argument #3 to '"..x.."' ("..B["Type"].." expected, got "..type(x)..")")end;k[w][x]=y;return end;return q(w,x,y)end)local C=isluau and isluau()or false;o.__namecall=newcclosure(function(D,...)local E={...}local F=C and getnamecallmethod()or table.remove(E)if n()then if F=="AddGetHook"then if#E<1 then error("mt-api: Invalid argument count")end;local G=E[1]local H=E[2]local I=E[3]if type(G)~="string"then error("mt-api: Invalid hook type")end;if not d[D]then d[D]={}end;if I==true and type(H)~="function"then error("mt-api: Invalid callback function")end;d[D][G]={Value=H,IsCallback=I}local J=function()d[D][G]=nil end;return{remove=J,Remove=J}end;if F=="AddGlobalGetHook"then local K=E[1]local L=E[2]local M=E[3]if type(K)~="string"then error("mt-api: Invalid hook type")end;if M==true and type(L)~="function"then error("mt-api: Invalid callback function")end;g[K]={Value=L,IsCallback=M}local N=function()g[K]=nil end;return{remove=N,Remove=N}end;if F=="AddSetHook"then if#E<1 then error("mt-api: Invalid argument count")end;local O=E[1]local P=E[2]if type(O)~="string"then error("mt-api: Invalid hook type")end;if not e[D]then e[D]={}end;if type(P)=="function"then e[D][O]={Callback=P}else e[D][O]={Callback=nil}end;local Q=function()e[D][O]=nil end;return{remove=Q,Remove=Q}end;if F=="AddGlobalSetHook"then if#E<1 then error("mt-api: Invalid argument count")end;local R=E[1]local S=E[2]if type(R)~="string"then error("mt-api: Invalid hook type")end;if type(S)=="function"then h[R]={Callback=S}else h[R]={Callback=nil}end;local T=function()h[R]=nil end;return{remove=T,Remove=T}end;if F=="AddCallHook"then if#E<2 then error("mt-api: Invalid argument count")end;local U=E[1]local V=E[2]if type(U)~="string"then error("mt-api: Invalid hook type")end;if type(V)~="function"then error("mt-api: Invalid argument #2 (not function)")end;if not f[D]then f[D]={}end;f[D][U]={Callback=V}local W=function()f[D][U]=nil end;return{remove=W,Remove=W}end;if F=="AddGlobalCallHook"then if#E<2 then error("mt-api: Invalid argument count")end;local X=E[1]local Y=E[2]if type(X)~="string"then error("mt-api: Invalid hook type")end;if type(Y)~="function"then error("mt-api: Invalid argument #2 (not function)")end;i[X]={Callback=Y}local Z=function()i[X]=nil end;return{remove=Z,Remove=Z}end;if F=="AddPropertyEmulator"then if#E<1 then error("mt-api: Invalid argument count")end;local _=E[1]if type(_)~="string"then error("mt-api: Invalid hook type")end;local a0=p(D,_)local a1=type(a0)if not j[D]then j[D]={}end;if not k[D]then k[D]={}end;j[D][_]={Type=a1}k[D][_]=p(D,_)local a2=function()j[D][_]=nil;k[D][_]=nil end;return{remove=a2,Remove=a2}end;return r(D,...)end;if f[D]and f[D][F]then local a3=f[D][F]return a3["Callback"](p(D,F),unpack(E))end;if i[F]then local a4=i[F]return a4["Callback"](D,p(D,F),unpack(E))end;return r(D,...)end)if m==0 then make_readonly(o)elseif m==2 then else setreadonly(o,true)end end;l()getgenv().MTAPIMutex=true
+	
+		game.Players.LocalPlayer.Character["Head"]:AddPropertyEmulator("Size")
+		wait(0.5)
+		game.Players.LocalPlayer.Character["Head"].Size = Vector3.new(5,5,5)
+		game.Players.LocalPlayer.Character["Head"].Transparency = 0.9
+	end)
 end
+coroutine.wrap(REXTSH_fake_script)()
+local function OAVARHV_fake_script() -- TextButton_5.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_5)
 
-function Library:_theme_selector()
-
-	local themesCount = 0
-
-	for _ in next, Library.Themes do
-		themesCount += 1
-	end
-
-	local themeContainer = self.container:object("Frame", {
-		Theme = {BackgroundColor3 = "Secondary"},
-		Size = UDim2.new(1, -20, 0, 127)
-	}):round(7)
-
-	local text = themeContainer:object("TextLabel", {
-		BackgroundTransparency = 1,
-		Position = UDim2.fromOffset(10, 5),
-		Size = UDim2.new(0.5, -10, 0, 22),
-		Text = "Theme",
-		TextSize = 22,
-		Theme = {TextColor3 = "StrongText"},
-		TextXAlignment = Enum.TextXAlignment.Left
-	})
-
-	local colorThemesContainer = themeContainer:object("Frame", {
-		Size = UDim2.new(1, 0, 1, -32),
-		BackgroundTransparency = 1,
-		Position = UDim2.new(0.5, 0, 1, -5),
-		AnchorPoint = Vector2.new(0.5, 1)
-	})
-
-	local grid = colorThemesContainer:object("UIGridLayout", {
-		CellPadding = UDim2.fromOffset(10, 10),
-		CellSize = UDim2.fromOffset(102, 83),
-		VerticalAlignment = Enum.VerticalAlignment.Center
-	})
-
-	colorThemesContainer:object("UIPadding", {
-		PaddingLeft = UDim.new(0, 10),
-		PaddingTop = UDim.new(0, 5)
-	})
-
-	for themeName, themeColors in next, Library.Themes do
-		local count = 0
-
-		for _, color in next, themeColors do
-			if not (type(color) == "boolean") then
-				count += 1
-			end
-		end
-
-		if count >= 5 then
-			local theme = colorThemesContainer:object("TextButton", {
-				BackgroundTransparency = 1
-			})
-
-			local themeColorsContainer = theme:object("Frame", {
-				Size = UDim2.new(1, 0, 1, -20),
-				BackgroundTransparency = 1
-			}):round(5):stroke("WeakText", 1)
-
-			local themeNameLabel = theme:object("TextLabel", {
-				BackgroundTransparency = 1,
-				Text = themeName,
-				TextSize = 16,
-				Theme = {TextColor3 = "StrongText"},
-				Size = UDim2.new(1, 0, 0, 20),
-				Position = UDim2.fromScale(0, 1),
-				AnchorPoint = Vector2.new(0, 1)
-			})
-
-			local colorMain = themeColorsContainer:object("Frame", {
-				Centered = true,
-				Size = UDim2.fromScale(1, 1),
-				BackgroundColor3 = themeColors.Main
-			}):round(4)
-
-			local colorSecondary = colorMain:object("Frame", {
-				Centered = true,
-				Size = UDim2.new(1, -16, 1, -16),
-				BackgroundColor3 = themeColors.Secondary
-			}):round(4)
-
-			colorSecondary:object("UIListLayout", {
-				Padding = UDim.new(0, 5)
-			})
-
-			colorSecondary:object("UIPadding", {
-				PaddingTop = UDim.new(0, 5),
-				PaddingLeft = UDim.new(0, 5)
-			})
-
-			local colorTertiary = colorSecondary:object("Frame", {
-				Size = UDim2.new(1, -20, 0, 9),
-				BackgroundColor3 = themeColors.Tertiary
-			}):round(100)
-
-			local colorStrong = colorSecondary:object("Frame", {
-				Size = UDim2.new(1, -30, 0, 9),
-				BackgroundColor3 = themeColors.StrongText
-			}):round(100)
-
-			local colorTertiary = colorSecondary:object("Frame", {
-				Size = UDim2.new(1, -40, 0, 9),
-				BackgroundColor3 = themeColors.WeakText
-			}):round(100)
-
-			theme.MouseButton1Click:connect(function()
-				Library:change_theme(Library.Themes[themeName])
-				updateSettings("Theme", themeName)
-			end)
-		end
-	end
-	self:_resize_tab()
-end
-
-
-function Library:keybind(options)
-	options = self:set_defaults({
-		Name = "Keybind",
-		Keybind = nil,
-		Description = nil,
-		Callback = function() end
-	}, options)
-
-	local keybindContainer = self.container:object("TextButton", {
-		Theme = {BackgroundColor3 = "Secondary"},
-		Size = UDim2.new(1, -20, 0, 52)
-	}):round(7)
-
-	local text = keybindContainer:object("TextLabel", {
-		BackgroundTransparency = 1,
-		Position = UDim2.fromOffset(10, (options.Description and 5) or 0),
-		Size = (options.Description and UDim2.new(0.5, -10, 0, 22)) or UDim2.new(0.5, -10, 1, 0),
-		Text = options.Name,
-		TextSize = 22,
-		Theme = {TextColor3 = "StrongText"},
-		TextXAlignment = Enum.TextXAlignment.Left
-	})
-
-	if options.Description then
-		local description = keybindContainer:object("TextLabel", {
-			BackgroundTransparency = 1,
-			Position = UDim2.fromOffset(10, 27),
-			Size = UDim2.new(0.5, -10, 0, 20),
-			Text = options.Description,
-			TextSize = 18,
-			Theme = {TextColor3 = "WeakText"},
-			TextXAlignment = Enum.TextXAlignment.Left
-		})
-	end
-
-
-	local keybindDisplay = keybindContainer:object("TextLabel", {
-		AnchorPoint = Vector2.new(1, 0),
-		Theme = {
-			BackgroundColor3 = {"Secondary", -20},
-			TextColor3 = "WeakText"
-		},
-		Position = UDim2.new(1, -20,0, 16),
-		Size = UDim2.new(0, 50,0, 20),
-		TextSize = 12,
-		Text = (options.Keybind and tostring(options.Keybind.Name):upper()) or "?"
-	}):round(5):stroke("Tertiary")
-
-	keybindDisplay.Size = UDim2.fromOffset(keybindDisplay.TextBounds.X + 20, 20)
-
-	do
-		local hovered = false
-		local down = false
-		local listening = false
-
-		keybindContainer.MouseEnter:connect(function()
-			hovered = true
-			keybindContainer:tween{BackgroundColor3 = self:lighten(Library.CurrentTheme.Secondary, 10)}
-		end)
-
-		keybindContainer.MouseLeave:connect(function()
-			hovered = false
-			if not down then
-				keybindContainer:tween{BackgroundColor3 = Library.CurrentTheme.Secondary}
-			end
-		end)
-
-		keybindContainer.MouseButton1Down:connect(function()
-			keybindContainer:tween{BackgroundColor3 = self:lighten(Library.CurrentTheme.Secondary, 20)}
-		end)
-
-		UserInputService.InputEnded:connect(function(key)
-			if key.UserInputType == Enum.UserInputType.MouseButton1 then
-				keybindContainer:tween{BackgroundColor3 = (hovered and self:lighten(Library.CurrentTheme.Secondary)) or Library.CurrentTheme.Secondary}
-			end
-		end)
-
-		UserInputService.InputBegan:Connect(function(key, gameProcessed)
-			if listening and not UserInputService:GetFocusedTextBox() then
-				if key.UserInputType == Enum.UserInputType.Keyboard then
-					if key.KeyCode ~= Enum.KeyCode.Escape then
-						options.Keybind = key.KeyCode
-					end
-					keybindDisplay.Text = (options.Keybind and tostring(options.Keybind.Name):upper()) or "?"
-					keybindDisplay:tween{Size = UDim2.fromOffset(keybindDisplay.TextBounds.X + 20, 20), Length = 0.05}
-					listening = false
-				end
-			else
-				if key.KeyCode == options.Keybind then
-					options.Callback()
-				end
-			end
-		end)
-
-		keybindContainer.MouseButton1Click:connect(function()
-			if not listening then listening = true; keybindDisplay.Text = "..." end
-		end)
-	end
-	self:_resize_tab()
-
-	local methods = {}
-
-	function methods:Set(keycode)
-		options.Keybind = keycode
-		keybindDisplay.Text = (options.Keybind and tostring(options.Keybind.Name):upper()) or "?"
-		keybindDisplay:tween{Size = UDim2.fromOffset(keybindDisplay.TextBounds.X + 20, 20), Length = 0.05}
-	end
-
-	return methods
-end
-
-function Library:prompt(options)
-	options = self:set_defaults({
-		Followup = false,
-		Title = "Prompt",
-		Text = "yo momma dead",
-		Buttons = {
-			ok = function()
-				return true
-			end
+	local button = script.Parent
+	local ts = game:GetService("TweenService")
+	local ti = TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.In) --you can set that to anything you want
+	local tIn = {BackgroundColor3 = Color3.fromRGB(255, 255, 255), TextColor3 = Color3.fromRGB(43, 43, 43)} --colors are up to you
+	local tOut = {BackgroundColor3 = Color3.fromRGB(43, 43, 43), TextColor3 = Color3.fromRGB(255, 255, 255)} --colors are up to you
+	local createIn = ts:Create(button, ti, tIn) --when mouse ENTERS button
+	local createOut = ts:Create(button, ti, tOut) --when mouse LEAVES button
+	
+	button.MouseEnter:Connect(function()
+	
+		createIn:Play()
+	
+	end)
+	
+	button.MouseLeave:Connect(function()
+	
+		createOut:Play()
+	
+	end)
+	
+	
+	
+	
+	button.MouseButton1Click:Connect(function()
+		local args = {
+			[1] = workspace.TPS,
+			[2] = CFrame.new(Vector3.new(104.05304718018, 3.7450363636017, 144.50581359863), Vector3.new(-0, -0, -1)),
+			[3] = Vector3.new(20.015998840332, 31.02379989624, 32.967914581299)
 		}
-	}, options)
+	
+		game:GetService("ReplicatedStorage").TPBall:FireServer(unpack(args))
+	end)
+end
+coroutine.wrap(OAVARHV_fake_script)()
+local function JTYHMX_fake_script() -- TextButton_6.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_6)
 
-	if Library._promptExists and not options.Followup then return end
-	Library._promptExists = true
+	local button = script.Parent
+	local ts = game:GetService("TweenService")
+	local ti = TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.In) --you can set that to anything you want
+	local tIn = {BackgroundColor3 = Color3.fromRGB(255, 255, 255), TextColor3 = Color3.fromRGB(43, 43, 43)} --colors are up to you
+	local tOut = {BackgroundColor3 = Color3.fromRGB(43, 43, 43), TextColor3 = Color3.fromRGB(255, 255, 255)} --colors are up to you
+	local createIn = ts:Create(button, ti, tIn) --when mouse ENTERS button
+	local createOut = ts:Create(button, ti, tOut) --when mouse LEAVES button
+	
+	button.MouseEnter:Connect(function()
+	
+		createIn:Play()
+	
+	end)
+	
+	button.MouseLeave:Connect(function()
+	
+		createOut:Play()
+	
+	end)
+	
+	
+	
+	
+	button.MouseButton1Click:Connect(function()
+		local args = {
+			[1] = workspace.TPS,
+			[2] = CFrame.new(Vector3.new(1014.05304718018, 33.7450363636017, 1444.50581359863), Vector3.new(-0, -0, -1)),
+			[3] = Vector3.new(202.015998840332, 311.02379989624, 342.967914581299)
+		}
+	
+		game:GetService("ReplicatedStorage").TPBall:FireServer(unpack(args))
+	end)
+end
+coroutine.wrap(JTYHMX_fake_script)()
+local function FRWE_fake_script() -- TextButton_7.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_7)
 
-	local count = 0; for a, _ in next, options.Buttons do
-		count += 1
-	end
-
-	local darkener = self.core:object("Frame", {
-		BackgroundColor3 = Color3.new(0, 0, 0),
-		BackgroundTransparency = 1,
-		Size = UDim2.fromScale(1, 1)
-	}):round(10)
-
-	local promptContainer = darkener:object("Frame", {
-		Theme = {BackgroundColor3 = "Main"},
-		BackgroundTransparency = 1,
-		Centered = true,
-		Size = UDim2.fromOffset(200, 120)
-	}):round(6)
-
-	local _promptContainerStroke = promptContainer:object("UIStroke", {
-		Theme = {Color = "Tertiary"},
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-		Transparency = 1
-	})
-
-	local _padding = promptContainer:object("UIPadding", {
-		PaddingTop = UDim.new(0, 5),
-		PaddingLeft = UDim.new(0, 5),
-		PaddingBottom = UDim.new(0, 5),
-		PaddingRight = UDim.new(0, 5)
-	})
-
-	local promptTitle = promptContainer:object("TextLabel", {
-		BackgroundTransparency = 1,
-		Size = UDim2.new(1, 0, 0, 20),
-		TextXAlignment = Enum.TextXAlignment.Center,
-		Font = Enum.Font.SourceSansBold,
-		Text = options.Title,
-		Theme = {TextColor3 = {"Tertiary", 15}},
-		TextSize = 16,
-		TextTransparency = 1
-	})
-
-	local promptText = promptContainer:object("TextLabel", {
-		AnchorPoint = Vector2.new(0.5, 0),
-		BackgroundTransparency = 1,
-		Position = UDim2.new(0.5, 0,0, 26),
-		Size = UDim2.new(1, -20,1, -60),
-		TextSize = 14,
-		Theme = {TextColor3 = "StrongText"},
-
-		Text = options.Text,
-		TextTransparency = 1,
-		TextYAlignment = Enum.TextYAlignment.Top,
-		TextXAlignment = Enum.TextXAlignment.Center,
-		TextWrapped = true,
-		TextTruncate = Enum.TextTruncate.AtEnd
-	})
-
-	local buttonHolder = promptContainer:object("Frame", {
-		BackgroundTransparency = 1,
-		AnchorPoint = Vector2.new(0, 1),
-		Position = UDim2.new(0, 0,1, -5),
-		Size = UDim2.new(1, 0,0, 20)
-	})
-
-	local _gridButtonHolder = buttonHolder:object("UIGridLayout", {
-		CellPadding = UDim2.new(0, 10,0, 5),
-		CellSize = UDim2.new(1/count, -10, 1, 0),
-		FillDirection = Enum.FillDirection.Horizontal,
-		HorizontalAlignment = Enum.HorizontalAlignment.Center
-	})
-
-	darkener:tween({BackgroundTransparency = 0.4, Length = 0.1})
-	promptContainer:tween({BackgroundTransparency = 0, Length = 0.1})
-	promptTitle:tween({TextTransparency = 0, Length = 0.1})
-	_promptContainerStroke:tween({Transparency = 0, Length = 0.1})
-	promptText:tween({TextTransparency = 0, Length = 0.1})
-
-	local _temporaryPromptButtons = {}
-
-	for text, callback in next, options.Buttons do
-		local button = buttonHolder:object("TextButton", {
-			AnchorPoint = Vector2.new(1, 1),
-			Theme = {BackgroundColor3 = "Tertiary"},
-			Text = tostring(text):upper(),
-			TextSize = 13,
-			Font = Enum.Font.SourceSansBold,
-			BackgroundTransparency = 1,
-			TextTransparency = 1
-		}):round(4)
-
-		table.insert(_temporaryPromptButtons, button)
-
-		do
-			button:tween({TextTransparency = 0, BackgroundTransparency = 0})
-
-			local hovered = false
-			local down = false
-
-			button.MouseEnter:connect(function()
-				hovered = true
-				button:tween{BackgroundColor3 = self:lighten(Library.CurrentTheme.Tertiary, 10)}
-			end)
-
-			button.MouseLeave:connect(function()
-				hovered = false
-				if not down then
-					button:tween{BackgroundColor3 = Library.CurrentTheme.Tertiary}
-				end
-			end)
-
-			button.MouseButton1Down:connect(function()
-				button:tween{BackgroundColor3 = self:lighten(Library.CurrentTheme.Tertiary, 20)}
-			end)
-
-			UserInputService.InputEnded:connect(function(key)
-				if key.UserInputType == Enum.UserInputType.MouseButton1 then
-					button:tween{BackgroundColor3 = (hovered and self:lighten(Library.CurrentTheme.Tertiary)) or Library.CurrentTheme.Tertiary}
-				end
-			end)
-
-			button.MouseButton1Click:connect(function()
-				promptContainer:tween({BackgroundTransparency = 1, Length = 0.1})
-				promptTitle:tween({TextTransparency = 1, Length = 0.1})
-				_promptContainerStroke:tween({Transparency = 1, Length = 0.1})
-				promptText:tween({TextTransparency = 1, Length = 0.1})
-				for i, b in next, _temporaryPromptButtons do
-					b:tween({TextTransparency = 1, BackgroundTransparency = 1, Length = 0.1})
-				end
-				darkener:tween({BackgroundTransparency = 1, Length = 0.1}, function()
-					darkener.AbsoluteObject:Destroy()
-					task.delay(0.25, function()
-						Library._promptExists = false
-					end)
-					callback()
-				end)
-			end)
+	local button = script.Parent
+	local ts = game:GetService("TweenService")
+	local ti = TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.In) --you can set that to anything you want
+	local tIn = {BackgroundColor3 = Color3.fromRGB(255, 255, 255), TextColor3 = Color3.fromRGB(43, 43, 43)} --colors are up to you
+	local tOut = {BackgroundColor3 = Color3.fromRGB(43, 43, 43), TextColor3 = Color3.fromRGB(255, 255, 255)} --colors are up to you
+	local createIn = ts:Create(button, ti, tIn) --when mouse ENTERS button
+	local createOut = ts:Create(button, ti, tOut) --when mouse LEAVES button
+	
+	button.MouseEnter:Connect(function()
+	
+		createIn:Play()
+	
+	end)
+	
+	button.MouseLeave:Connect(function()
+	
+		createOut:Play()
+	
+	end)
+	
+	
+	
+	
+	button.MouseButton1Click:Connect(function()
+				for i,balls in pairs(game.Lighting:GetDescendants()) do
+					if balls.Name == "TPS" then
+						game.ReplicatedStorage.CatchBall:FireServer(balls)
+					end
 		end
-	end
+	end)
+	
 end
+coroutine.wrap(FRWE_fake_script)()
+local function XVKIRXB_fake_script() -- TextButton_8.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_8)
 
-function Library:cp(options)
-	return Library.color_picker(self, options)
-end
-function Library:colorpicker(options)
-	return Library.color_picker(self, options)
-end
-
-function Library:slider(options)
-	options = self:set_defaults({
-		Name = "Slider",
-		Default = 50,
-		Min = 0,
-		Max = 100,
-		Callback = function() end
-	}, options)
-
-
-	local sliderContainer = self.container:object("TextButton", {
-		Theme = {BackgroundColor3 = "Secondary"},
-		Size = UDim2.new(1, -20, 0, 56)
-	}):round(7)
-
-	local text = sliderContainer:object("TextLabel", {
-		BackgroundTransparency = 1,
-		Position = UDim2.fromOffset(10, 5),
-		Size = UDim2.new(0.5, -10, 0, 22),
-		Text = options.Name,
-		TextSize = 22,
-		Theme = {TextColor3 = "StrongText"},
-		TextXAlignment = Enum.TextXAlignment.Left
-	})
-
-	if options.Description then
-		local description = sliderContainer:object("TextLabel", {
-			BackgroundTransparency = 1,
-			Position = UDim2.fromOffset(10, 27),
-			Size = UDim2.new(0.5, -10, 0, 20),
-			Text = options.Description,
-			TextSize = 18,
-			Theme = {TextColor3 = "WeakText"},
-			TextXAlignment = Enum.TextXAlignment.Left
-		})
-		sliderContainer.Size = UDim2.new(1, -20, 0, 76)
-	end
-
-	local valueText = sliderContainer:object("TextLabel", {
-		AnchorPoint = Vector2.new(1, 0),
-
-		Theme = {
-			BackgroundColor3 = {"Secondary", -20},
-			TextColor3 = "WeakText"
-		},
-		Position = UDim2.new(1, -10, 0, 10),
-		Size = UDim2.new(0, 50,0, 20),
-		TextSize = 12,
-		Text = options.Default
-	}):round(5):stroke("Tertiary")
-
-	valueText.Size = UDim2.fromOffset(valueText.TextBounds.X + 20, 20)
-
-	local sliderBar = sliderContainer:object("Frame", {
-		Theme = {BackgroundColor3 = {"Secondary", -20}},
-		AnchorPoint = Vector2.new(0.5, 1),
-		Size = UDim2.new(1, -20, 0, 5),
-		Position = UDim2.new(0.5, 0, 1, -12)
-	}):round(100)
-
-	local sliderLine = sliderBar:object("Frame", {
-		Size = UDim2.fromScale(((options.Default - options.Min) / (options.Max - options.Min)), 1),
-		Theme = {BackgroundColor3 = "Tertiary"}
-
-	}):round(100)
-
-	local sliderBall = sliderLine:object("Frame", {
-		AnchorPoint = Vector2.new(0.5, 0.5),
-		Position = UDim2.fromScale(1, 0.5),
-		Size = UDim2.fromOffset(14, 14),
-		Theme = {BackgroundColor3 = {"Tertiary", 20}}
-	}):round(100)
-
-	do
-		local hovered = false
-		local down = false
-
-		sliderContainer.MouseEnter:connect(function()
-			hovered = true
-			sliderContainer:tween{BackgroundColor3 = self:lighten(Library.CurrentTheme.Secondary, 10)}
-		end)
-
-		sliderContainer.MouseLeave:connect(function()
-			hovered = false
-			if not down then
-				sliderContainer:tween{BackgroundColor3 = Library.CurrentTheme.Secondary}
-			end
-		end)
-
-		UserInputService.InputEnded:connect(function(key)
-			if key.UserInputType == Enum.UserInputType.MouseButton1 then
-				down = false
-				sliderContainer:tween{BackgroundColor3 = (hovered and self:lighten(Library.CurrentTheme.Secondary)) or Library.CurrentTheme.Secondary}
-			end
-		end)
-
-		sliderContainer.MouseButton1Down:connect(function()
-			sliderContainer:tween{BackgroundColor3 = self:lighten(Library.CurrentTheme.Secondary, 20)}
-			down = true
-			local tween = valueText:tween{Size = UDim2.fromOffset(valueText.TextBounds.X + 20, 20)}
-			while RunService.RenderStepped:wait() and down do
-				local percentage = math.clamp((Mouse.X - sliderBar.AbsolutePosition.X) / (sliderBar.AbsoluteSize.X), 0, 1)
-				local value = ((options.Max - options.Min) * percentage) + options.Min
-				value = math.floor(value)
-				valueText.Text = value
-				if tween.PlaybackState == Enum.PlaybackState.Completed then
-					tween = valueText:tween{Size = UDim2.fromOffset(valueText.TextBounds.X + 20, 20)}
+	local button = script.Parent
+	local ts = game:GetService("TweenService")
+	local ti = TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.In) --you can set that to anything you want
+	local tIn = {BackgroundColor3 = Color3.fromRGB(255, 255, 255), TextColor3 = Color3.fromRGB(43, 43, 43)} --colors are up to you
+	local tOut = {BackgroundColor3 = Color3.fromRGB(43, 43, 43), TextColor3 = Color3.fromRGB(255, 255, 255)} --colors are up to you
+	local createIn = ts:Create(button, ti, tIn) --when mouse ENTERS button
+	local createOut = ts:Create(button, ti, tOut) --when mouse LEAVES button
+	
+	button.MouseEnter:Connect(function()
+	
+		createIn:Play()
+	
+	end)
+	
+	button.MouseLeave:Connect(function()
+	
+		createOut:Play()
+	
+	end)
+	
+	
+	
+	
+	button.MouseButton1Click:Connect(function()
+				for i,balls in pairs(game.Lighting:GetDescendants()) do
+			if balls.Name == "TPS" then
+				while true do
+					wait()
+					game.ReplicatedStorage.CatchBall:FireServer(balls)
 				end
-				sliderLine:tween{
-					Length = 0.06,
-					Size = UDim2.fromScale(percentage, 1)
-				}
-				options.Callback(value)
 			end
-		end)
-	end
-	self:_resize_tab()
-
-	local methods = {}
-
-	function methods:Set(value)
-		sliderLine:tween{Size = UDim2.fromScale(((value - options.Min) / (options.Max - options.Min)), 1)}
-	end
-
-	return methods
-end
-
-function Library:textbox(options)
-	options = self:set_defaults({
-		Name = "Text Box",
-		Placeholder = "Type something..",
-		Description = nil,
-		Callback = function(t) end
-	}, options)
-
-	local textboxContainer = self.container:object("TextButton", {
-		Theme = {BackgroundColor3 = "Secondary"},
-		Size = UDim2.new(1, -20, 0, 52)
-	}):round(7)
-
-	local text = textboxContainer:object("TextLabel", {
-		BackgroundTransparency = 1,
-		Position = UDim2.fromOffset(10, (options.Description and 5) or 0),
-		Size = (options.Description and UDim2.new(0.5, -10, 0, 22)) or UDim2.new(0.5, -10, 1, 0),
-		Text = options.Name,
-		TextSize = 22,
-		Theme = {TextColor3 = "StrongText"},
-		TextXAlignment = Enum.TextXAlignment.Left
-	})
-
-	if options.Description then
-		local description = textboxContainer:object("TextLabel", {
-			BackgroundTransparency = 1,
-			Position = UDim2.fromOffset(10, 27),
-			Size = UDim2.new(0.5, -10, 0, 20),
-			Text = options.Description,
-			TextSize = 18,
-			Theme = {TextColor3 = "WeakText"},
-			TextXAlignment = Enum.TextXAlignment.Left
-		})
-	end
-
-
-	local textBox = textboxContainer:object("TextBox", {
-		AnchorPoint = Vector2.new(1, 0),
-		Theme = {
-			BackgroundColor3 = {"Secondary", -20},
-			TextColor3 = "WeakText"
-		},
-		Position = UDim2.new(1, -50,0, 16),
-		Size = UDim2.new(0, 50,0, 20),
-		TextSize = 12,
-		PlaceholderText = options.Placeholder,
-		ClipsDescendants = true
-	}):round(5):stroke("Tertiary")
-
-	local writeIcon = textboxContainer:object("ImageLabel", {
-		Image = "http://www.roblox.com/asset/?id=8569329416",
-		AnchorPoint = Vector2.new(1, 0.5),
-		BackgroundTransparency = 1,
-		Position = UDim2.new(1, -13, 0.5, 0),
-		Size = UDim2.new(0, 16, 0, 16),
-		Theme = {ImageColor3 = "StrongText"}
-	})
-
-
-
-	textBox.Size = UDim2.fromOffset(textBox.TextBounds.X + 20, 20)
-
-	do
-		local hovered = false
-		local down = false
-		local focused = false
-
-		textboxContainer.MouseEnter:connect(function()
-			textboxContainer:tween{BackgroundColor3 = self:lighten(Library.CurrentTheme.Secondary, 10)}
-		end)
-
-		textboxContainer.MouseLeave:connect(function()
-			hovered = false
-			if not down then
-				textboxContainer:tween{BackgroundColor3 = Library.CurrentTheme.Secondary}
-			end
-		end)
-
-		textBox.Focused:connect(function()
-			focused = true
-			while focused and RunService.RenderStepped:wait() do
-				textBox.AbsoluteObject:TweenSize(
-					UDim2.fromOffset(math.clamp(textBox.TextBounds.X + 20, 0, 0.5 * textboxContainer.AbsoluteSize.X), 20),
-					Enum.EasingDirection.InOut,
-					Enum.EasingStyle.Linear,
-					0.1,
-					true
-				)
-			end
-		end)
-
-		textBox.FocusLost:connect(function()
-			focused = false
-			textBox.AbsoluteObject:TweenSize(
-				UDim2.fromOffset(math.clamp(textBox.TextBounds.X + 20, 0, 0.5 * textboxContainer.AbsoluteSize.X), 20),
-				Enum.EasingDirection.InOut,
-				Enum.EasingStyle.Linear,
-				0.1,
-				true
-			)
-			options.Callback(textBox.Text)
-		end)
-	end
-	self:_resize_tab()
-
-	local methods = {}
-
-	function methods:Set(text)
-		textBox.Text = text
-	end
-
-	return methods
-end
-
-function Library:label(options)
-
-	options = self:set_defaults({
-		Text = "Label title",
-		Description = "Label text",
-	}, options)
-
-	local labelContainer = self.container:object("TextButton", {
-		Theme = {BackgroundColor3 = "Secondary"},
-		Size = UDim2.new(1, -20, 0, 52),
-		BackgroundTransparency = 1
-	}):round(7):stroke("Secondary", 2)
-
-	local text = labelContainer:object("TextLabel", {
-		BackgroundTransparency = 1,
-		Position = UDim2.fromOffset(10, 5),
-		Size = UDim2.new(0.5, -10, 0, 22),
-		Text = options.Text,
-		TextSize = 22,
-		Theme = {TextColor3 = "StrongText"},
-		TextXAlignment = Enum.TextXAlignment.Left
-	})
-
-	local description = labelContainer:object("TextLabel", {
-		BackgroundTransparency = 1,
-		Position = UDim2.new(0, 10, 1, -5),
-		Size = UDim2.new(0.5, -10, 1, -22),
-		Text = options.Description,
-		TextSize = 18,
-		AnchorPoint = Vector2.new(0, 1),
-		Theme = {TextColor3 = "WeakText"},
-		TextXAlignment = Enum.TextXAlignment.Left
-	})
+		end
+	end)
 	
-	self:_resize_tab()
-
-	local methods = {}
-
-	function methods:SetText(txt)
-		text.Text = txt
-	end
-	
-	function methods:SetDescription(txt)
-		description.Text = txt
-	end
-
-	return methods
 end
+coroutine.wrap(XVKIRXB_fake_script)()
+local function IKONX_fake_script() -- TextButton_9.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_9)
 
-return setmetatable(Library, {
-	__index = function(_, i)
-		return rawget(Library, i:lower())
-	end
-})
+	local button = script.Parent
+	local ts = game:GetService("TweenService")
+	local ti = TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.In) --you can set that to anything you want
+	local tIn = {BackgroundColor3 = Color3.fromRGB(255, 255, 255), TextColor3 = Color3.fromRGB(43, 43, 43)} --colors are up to you
+	local tOut = {BackgroundColor3 = Color3.fromRGB(43, 43, 43), TextColor3 = Color3.fromRGB(255, 255, 255)} --colors are up to you
+	local createIn = ts:Create(button, ti, tIn) --when mouse ENTERS button
+	local createOut = ts:Create(button, ti, tOut) --when mouse LEAVES button
+	
+	button.MouseEnter:Connect(function()
+	
+		createIn:Play()
+	
+	end)
+	
+	button.MouseLeave:Connect(function()
+	
+		createOut:Play()
+	
+	end)
+	
+	
+	
+	
+	button.MouseButton1Click:Connect(function()
+		for i,balls in pairs(game.Lighting:GetDescendants()) do
+			if balls.Name == "TPS" then
+				game.ReplicatedStorage.CatchBall:FireServer(balls)
+				wait()
+				game.ReplicatedStorage.DropBall:FireServer(balls)
+				end
+			end
+	end)
+	
+end
+coroutine.wrap(IKONX_fake_script)()
+local function PIEH_fake_script() -- TextButton_10.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_10)
+
+	local button = script.Parent
+	local ts = game:GetService("TweenService")
+	local ti = TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.In) --you can set that to anything you want
+	local tIn = {BackgroundColor3 = Color3.fromRGB(255, 255, 255), TextColor3 = Color3.fromRGB(43, 43, 43)} --colors are up to you
+	local tOut = {BackgroundColor3 = Color3.fromRGB(43, 43, 43), TextColor3 = Color3.fromRGB(255, 255, 255)} --colors are up to you
+	local createIn = ts:Create(button, ti, tIn) --when mouse ENTERS button
+	local createOut = ts:Create(button, ti, tOut) --when mouse LEAVES button
+	
+	button.MouseEnter:Connect(function()
+	
+		createIn:Play()
+	
+	end)
+	
+	button.MouseLeave:Connect(function()
+	
+		createOut:Play()
+	
+	end)
+	
+	
+	
+	
+	button.MouseButton1Click:Connect(function()
+		if getgenv().MTAPIMutex~=nil then return end;local function a()if is_protosmasher_caller~=nil then return 0 end;if elysianexecute~=nil then return 1 end;if fullaccess~=nil then return 2 end;if Synapse~=nil then return 3 end;return 4 end;local function b()local c=a()if c==0 then return is_protosmasher_caller end;if c==1 or c==3 then return checkcaller end;if c==2 then return IsLevel7 end;return nil end;if a()==2 then error("mt-api: Exploit not supported")end;local d={}local e={}local f={}local g={}local h={}local i={}local j={}local k={}local function l()local m=a()local n=b()local o=getrawmetatable(game)if m==0 then make_writeable(o)elseif m==2 then fullaccess(o)else setreadonly(o,false)end;local p=o.__index;local q=o.__newindex;local r=o.__namecall;o.__index=newcclosure(function(s,t)if n()then return p(s,t)end;if d[s]and d[s][t]then local u=d[s][t]if u["IsCallback"]==true then return u["Value"](s)else return u["Value"]end end;if g[t]then local v=g[t]if v["IsCallback"]==true then return v["Value"](s)else return v["Value"]end end;if j[s]and j[s][t]then return k[s][t]end;return p(s,t)end)o.__newindex=newcclosure(function(w,x,y)if n()then return q(w,x,y)end;if e[w]and e[w][x]then local z=e[w][x]if z["Callback"]==nil then return else z["Callback"](w,y)return end end;if h[x]then local A=h[x]if A["Callback"]==nil then return else A["Callback"](w,y)return end end;if j[w]and j[w][x]then local B=j[w][x]if type(y)~=B["Type"]then error("bad argument #3 to '"..x.."' ("..B["Type"].." expected, got "..type(x)..")")end;k[w][x]=y;return end;return q(w,x,y)end)local C=isluau and isluau()or false;o.__namecall=newcclosure(function(D,...)local E={...}local F=C and getnamecallmethod()or table.remove(E)if n()then if F=="AddGetHook"then if#E<1 then error("mt-api: Invalid argument count")end;local G=E[1]local H=E[2]local I=E[3]if type(G)~="string"then error("mt-api: Invalid hook type")end;if not d[D]then d[D]={}end;if I==true and type(H)~="function"then error("mt-api: Invalid callback function")end;d[D][G]={Value=H,IsCallback=I}local J=function()d[D][G]=nil end;return{remove=J,Remove=J}end;if F=="AddGlobalGetHook"then local K=E[1]local L=E[2]local M=E[3]if type(K)~="string"then error("mt-api: Invalid hook type")end;if M==true and type(L)~="function"then error("mt-api: Invalid callback function")end;g[K]={Value=L,IsCallback=M}local N=function()g[K]=nil end;return{remove=N,Remove=N}end;if F=="AddSetHook"then if#E<1 then error("mt-api: Invalid argument count")end;local O=E[1]local P=E[2]if type(O)~="string"then error("mt-api: Invalid hook type")end;if not e[D]then e[D]={}end;if type(P)=="function"then e[D][O]={Callback=P}else e[D][O]={Callback=nil}end;local Q=function()e[D][O]=nil end;return{remove=Q,Remove=Q}end;if F=="AddGlobalSetHook"then if#E<1 then error("mt-api: Invalid argument count")end;local R=E[1]local S=E[2]if type(R)~="string"then error("mt-api: Invalid hook type")end;if type(S)=="function"then h[R]={Callback=S}else h[R]={Callback=nil}end;local T=function()h[R]=nil end;return{remove=T,Remove=T}end;if F=="AddCallHook"then if#E<2 then error("mt-api: Invalid argument count")end;local U=E[1]local V=E[2]if type(U)~="string"then error("mt-api: Invalid hook type")end;if type(V)~="function"then error("mt-api: Invalid argument #2 (not function)")end;if not f[D]then f[D]={}end;f[D][U]={Callback=V}local W=function()f[D][U]=nil end;return{remove=W,Remove=W}end;if F=="AddGlobalCallHook"then if#E<2 then error("mt-api: Invalid argument count")end;local X=E[1]local Y=E[2]if type(X)~="string"then error("mt-api: Invalid hook type")end;if type(Y)~="function"then error("mt-api: Invalid argument #2 (not function)")end;i[X]={Callback=Y}local Z=function()i[X]=nil end;return{remove=Z,Remove=Z}end;if F=="AddPropertyEmulator"then if#E<1 then error("mt-api: Invalid argument count")end;local _=E[1]if type(_)~="string"then error("mt-api: Invalid hook type")end;local a0=p(D,_)local a1=type(a0)if not j[D]then j[D]={}end;if not k[D]then k[D]={}end;j[D][_]={Type=a1}k[D][_]=p(D,_)local a2=function()j[D][_]=nil;k[D][_]=nil end;return{remove=a2,Remove=a2}end;return r(D,...)end;if f[D]and f[D][F]then local a3=f[D][F]return a3["Callback"](p(D,F),unpack(E))end;if i[F]then local a4=i[F]return a4["Callback"](D,p(D,F),unpack(E))end;return r(D,...)end)if m==0 then make_readonly(o)elseif m==2 then else setreadonly(o,true)end end;l()getgenv().MTAPIMutex=true
+	
+		game.Players.LocalPlayer.Character["Left Leg"]:AddPropertyEmulator("Size")
+		wait(0.5)
+		game.Players.LocalPlayer.Character["Left Leg"].Massless = true
+		game.Players.LocalPlayer.Character["Left Leg"].Size = Vector3.new (12.3, 2.11, 10.2)
+		game.Players.LocalPlayer.Character["Left Leg"].Transparency = 0.9
+	end)
+	
+end
+coroutine.wrap(PIEH_fake_script)()
+local function TXGR_fake_script() -- TextButton_11.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_11)
+
+	local button = script.Parent
+	local ts = game:GetService("TweenService")
+	local ti = TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.In) --you can set that to anything you want
+	local tIn = {BackgroundColor3 = Color3.fromRGB(255, 255, 255), TextColor3 = Color3.fromRGB(43, 43, 43)} --colors are up to you
+	local tOut = {BackgroundColor3 = Color3.fromRGB(43, 43, 43), TextColor3 = Color3.fromRGB(255, 255, 255)} --colors are up to you
+	local createIn = ts:Create(button, ti, tIn) --when mouse ENTERS button
+	local createOut = ts:Create(button, ti, tOut) --when mouse LEAVES button
+	
+	button.MouseEnter:Connect(function()
+	
+		createIn:Play()
+	
+	end)
+	
+	button.MouseLeave:Connect(function()
+	
+		createOut:Play()
+	
+	end)
+	
+	
+	
+	
+	button.MouseButton1Click:Connect(function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/CMD-X/CMD-X/master/Source", true))()
+	end)
+	
+end
+coroutine.wrap(TXGR_fake_script)()
+local function FNFNDRH_fake_script() -- TextButton_12.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_12)
+
+	local button = script.Parent
+	local ts = game:GetService("TweenService")
+	local ti = TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.In) --you can set that to anything you want
+	local tIn = {BackgroundColor3 = Color3.fromRGB(255, 255, 255), TextColor3 = Color3.fromRGB(43, 43, 43)} --colors are up to you
+	local tOut = {BackgroundColor3 = Color3.fromRGB(43, 43, 43), TextColor3 = Color3.fromRGB(255, 255, 255)} --colors are up to you
+	local createIn = ts:Create(button, ti, tIn) --when mouse ENTERS button
+	local createOut = ts:Create(button, ti, tOut) --when mouse LEAVES button
+	
+	button.MouseEnter:Connect(function()
+	
+		createIn:Play()
+	
+	end)
+	
+	button.MouseLeave:Connect(function()
+	
+		createOut:Play()
+	
+	end)
+	
+	
+	
+	
+	button.MouseButton1Click:Connect(function()
+		local RunService = game:GetService("RunService")
+		RunService.RenderStepped:connect(function()
+			game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 22
+		end)
+		local e = game:GetService("\82\117\110\83\101\114\118\105\99\101") e.RenderStepped:connect(function() local c = game:GetService("\80\108\97\121\101\114\115").LocalPlayer.PlayerGui.Start.Points.StaminaBar c.Size = UDim2.new(0,200,0,3) c.Name = "" end)
+	end)
+	
+end
+coroutine.wrap(FNFNDRH_fake_script)()
+local function LVXMBYW_fake_script() -- TextButton_13.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_13)
+
+	local button = script.Parent
+	local ts = game:GetService("TweenService")
+	local ti = TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.In) --you can set that to anything you want
+	local tIn = {BackgroundColor3 = Color3.fromRGB(255, 255, 255), TextColor3 = Color3.fromRGB(43, 43, 43)} --colors are up to you
+	local tOut = {BackgroundColor3 = Color3.fromRGB(43, 43, 43), TextColor3 = Color3.fromRGB(255, 255, 255)} --colors are up to you
+	local createIn = ts:Create(button, ti, tIn) --when mouse ENTERS button
+	local createOut = ts:Create(button, ti, tOut) --when mouse LEAVES button
+	
+	button.MouseEnter:Connect(function()
+	
+		createIn:Play()
+	
+	end)
+	
+	button.MouseLeave:Connect(function()
+	
+		createOut:Play()
+	
+	end)
+	
+	
+	
+	
+	button.MouseButton1Click:Connect(function()
+		local RunService = game:GetService("RunService")
+		RunService.RenderStepped:connect(function()
+			game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 22
+		end)
+		local e = game:GetService("\82\117\110\83\101\114\118\105\99\101") e.RenderStepped:connect(function() local c = game:GetService("\80\108\97\121\101\114\115").LocalPlayer.PlayerGui.Start.Points.StaminaBar c.Size = UDim2.new(0,200,0,3) c.Name = "" end)
+	end)
+	
+end
+coroutine.wrap(LVXMBYW_fake_script)()
+local function LZZTXN_fake_script() -- TextButton_14.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_14)
+
+	local button = script.Parent
+	local ts = game:GetService("TweenService")
+	local ti = TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.In) --you can set that to anything you want
+	local tIn = {BackgroundColor3 = Color3.fromRGB(255, 255, 255), TextColor3 = Color3.fromRGB(43, 43, 43)} --colors are up to you
+	local tOut = {BackgroundColor3 = Color3.fromRGB(43, 43, 43), TextColor3 = Color3.fromRGB(255, 255, 255)} --colors are up to you
+	local createIn = ts:Create(button, ti, tIn) --when mouse ENTERS button
+	local createOut = ts:Create(button, ti, tOut) --when mouse LEAVES button
+	
+	button.MouseEnter:Connect(function()
+	
+		createIn:Play()
+	
+	end)
+	
+	button.MouseLeave:Connect(function()
+	
+		createOut:Play()
+	
+	end)
+	
+	
+	
+	
+	button.MouseButton1Click:Connect(function()
+		loadstring(game:HttpGet("https://pastebin.com/raw/KNUzQPYS", true))()
+	end)
+	
+end
+coroutine.wrap(LZZTXN_fake_script)()
+local function EMTKDD_fake_script() -- TextButton_15.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_15)
+script.Parent.ZIIndex = 10
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.Parent.Parent.Main.Visible = true
+		script.Parent.Parent.Parent.Credits.Visible = false
+		script.Parent.Parent.Parent.Information.Visible = false
+	end)
+end
+coroutine.wrap(EMTKDD_fake_script)()
+local function SBMLZ_fake_script() -- TextButton_16.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_16)
+script.Parent.ZIIndex = 10
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.Parent.Parent.Main.Visible = false
+		script.Parent.Parent.Parent.Credits.Visible = true
+		script.Parent.Parent.Parent.Information.Visible = false
+	end)
+end
+coroutine.wrap(SBMLZ_fake_script)()
+local function VWOX_fake_script() -- TextButton_17.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_17)
+script.Parent.ZIIndex = 10
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.Parent.Parent.Main.Visible = false
+		script.Parent.Parent.Parent.Credits.Visible = false
+		script.Parent.Parent.Parent.Information.Visible = true
+	end)
+end
+coroutine.wrap(VWOX_fake_script)()
+local function RHGICX_fake_script() -- TextButton_18.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_18)
+
+	local button = script.Parent
+	local ts = game:GetService("TweenService")
+	local ti = TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.In) --you can set that to anything you want
+	local tIn = {BackgroundColor3 = Color3.fromRGB(255, 255, 255), TextColor3 = Color3.fromRGB(43, 43, 43)} --colors are up to you
+	local tOut = {BackgroundColor3 = Color3.fromRGB(43, 43, 43), TextColor3 = Color3.fromRGB(255, 255, 255)} --colors are up to you
+	local createIn = ts:Create(button, ti, tIn) --when mouse ENTERS button
+	local createOut = ts:Create(button, ti, tOut) --when mouse LEAVES button
+	
+	button.MouseEnter:Connect(function()
+	
+		createIn:Play()
+	
+	end)
+	
+	button.MouseLeave:Connect(function()
+	
+		createOut:Play()
+	
+	end)
+	
+end
+coroutine.wrap(RHGICX_fake_script)()
+local function TEQIBW_fake_script() -- TextButton_19.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_19)
+
+	local button = script.Parent
+	local ts = game:GetService("TweenService")
+	local ti = TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.In) --you can set that to anything you want
+	local tIn = {BackgroundColor3 = Color3.fromRGB(255, 255, 255), TextColor3 = Color3.fromRGB(43, 43, 43)} --colors are up to you
+	local tOut = {BackgroundColor3 = Color3.fromRGB(43, 43, 43), TextColor3 = Color3.fromRGB(255, 255, 255)} --colors are up to you
+	local createIn = ts:Create(button, ti, tIn) --when mouse ENTERS button
+	local createOut = ts:Create(button, ti, tOut) --when mouse LEAVES button
+	
+	button.MouseEnter:Connect(function()
+	
+		createIn:Play()
+	
+	end)
+	
+	button.MouseLeave:Connect(function()
+	
+		createOut:Play()
+	
+	end)
+	
+end
+coroutine.wrap(TEQIBW_fake_script)()
+local function AMOM_fake_script() -- TextButton_20.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_20)
+
+	local button = script.Parent
+	local ts = game:GetService("TweenService")
+	local ti = TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.In) --you can set that to anything you want
+	local tIn = {BackgroundColor3 = Color3.fromRGB(255, 255, 255), TextColor3 = Color3.fromRGB(43, 43, 43)} --colors are up to you
+	local tOut = {BackgroundColor3 = Color3.fromRGB(43, 43, 43), TextColor3 = Color3.fromRGB(255, 255, 255)} --colors are up to you
+	local createIn = ts:Create(button, ti, tIn) --when mouse ENTERS button
+	local createOut = ts:Create(button, ti, tOut) --when mouse LEAVES button
+	
+	button.MouseEnter:Connect(function()
+	
+		createIn:Play()
+	
+	end)
+	
+	button.MouseLeave:Connect(function()
+	
+		createOut:Play()
+	
+	end)
+	
+	
+end
+coroutine.wrap(AMOM_fake_script)()
+local function SVMRX_fake_script() -- TextButton_21.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_21)
+
+	local button = script.Parent
+	local ts = game:GetService("TweenService")
+	local ti = TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.In) --you can set that to anything you want
+	local tIn = {BackgroundColor3 = Color3.fromRGB(255, 255, 255), TextColor3 = Color3.fromRGB(40, 50, 20)} --colors are up to you
+	local tOut = {BackgroundColor3 = Color3.fromRGB(43, 43, 43), TextColor3 = Color3.fromRGB(255, 255, 255)} --colors are up to you
+	local createIn = ts:Create(button, ti, tIn) --when mouse ENTERS button
+	local createOut = ts:Create(button, ti, tOut) --when mouse LEAVES button
+	
+	button.MouseEnter:Connect(function()
+	
+		createIn:Play()
+	
+	end)
+	
+	button.MouseLeave:Connect(function()
+	
+		createOut:Play()
+	
+	end)
+	
+end
+coroutine.wrap(SVMRX_fake_script)()
+local function SSWUOAQ_fake_script() -- TextButton_22.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_22)
+
+	local button = script.Parent
+	local ts = game:GetService("TweenService")
+	local ti = TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.In) --you can set that to anything you want
+	local tIn = {BackgroundColor3 = Color3.fromRGB(200, 255, 255), TextColor3 = Color3.fromRGB(43, 43, 43)} --colors are up to you
+	local tOut = {BackgroundColor3 = Color3.fromRGB(43, 43, 43), TextColor3 = Color3.fromRGB(255, 255, 255)} --colors are up to you
+	local createIn = ts:Create(button, ti, tIn) --when mouse ENTERS button
+	local createOut = ts:Create(button, ti, tOut) --when mouse LEAVES button
+	
+	button.MouseEnter:Connect(function()
+	
+		createIn:Play()
+	
+	end)
+	
+	button.MouseLeave:Connect(function()
+	
+		createOut:Play()
+	
+	end)
+	
+end
+coroutine.wrap(SSWUOAQ_fake_script)()
+local function EDJZFA_fake_script() -- TextButton_23.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_23)
+
+	local button = script.Parent
+	local ts = game:GetService("TweenService")
+	local ti = TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.In) --you can set that to anything you want
+	local tIn = {BackgroundColor3 = Color3.fromRGB(255, 255, 255), TextColor3 = Color3.fromRGB(43, 43, 43)} --colors are up to you
+	local tOut = {BackgroundColor3 = Color3.fromRGB(43, 43, 43), TextColor3 = Color3.fromRGB(255, 255, 255)} --colors are up to you
+	local createIn = ts:Create(button, ti, tIn) --when mouse ENTERS button
+	local createOut = ts:Create(button, ti, tOut) --when mouse LEAVES button
+	
+	button.MouseEnter:Connect(function()
+	
+		createIn:Play()
+	
+	end)
+	
+	button.MouseLeave:Connect(function()
+	
+		createOut:Play()
+	
+	end)
+	
+	button.MouseButton1Click:Connect(function()
+		
+	end)
+end
+coroutine.wrap(EDJZFA_fake_script)()
+local function XEHZL_fake_script() -- Frame.LocalScript 
+	local script = Instance.new('LocalScript', Frame)
+
+	script.Parent.Active = true
+	script.Parent.Selectable = true
+	script.Parent.Draggable = true
+	
+	
+	game:GetService("UserInputService").InputBegan:Connect(function(K,g)
+		if g then return end
+		if K.KeyCode == Enum.KeyCode.Comma then
+			if script.Parent.Visible == true then
+				script.Parent.Visible = false
+			else
+				script.Parent.Visible = true
+			end
+		end
+	end)
+	
+end
+coroutine.wrap(XEHZL_fake_script)()
+local function BGJZVR_fake_script() -- TextButton_24.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_24)
+
+	local button = script.Parent
+	local ts = game:GetService("TweenService")
+	local ti = TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.In) --you can set that to anything you want
+	local tIn = {BackgroundColor3 = Color3.fromRGB(255, 255, 255), TextColor3 = Color3.fromRGB(43, 43, 43)} --colors are up to you
+	local tOut = {BackgroundColor3 = Color3.fromRGB(43, 43, 43), TextColor3 = Color3.fromRGB(255, 255, 255)} --colors are up to you
+	local createIn = ts:Create(button, ti, tIn) --when mouse ENTERS button
+	local createOut = ts:Create(button, ti, tOut) --when mouse LEAVES button
+	
+	button.MouseEnter:Connect(function()
+	
+		createIn:Play()
+	
+	end)
+	
+	button.MouseLeave:Connect(function()
+	
+		createOut:Play()
+	
+	end)
+	
+end
+coroutine.wrap(BGJZVR_fake_script)()
+local function PWBN_fake_script() -- TextButton_25.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_25)
+
+	local button = script.Parent
+	local ts = game:GetService("TweenService")
+	local ti = TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.In) --you can set that to anything you want
+	local tIn = {BackgroundColor3 = Color3.fromRGB(255, 255, 255), TextColor3 = Color3.fromRGB(43, 43, 43)} --colors are up to you
+	local tOut = {BackgroundColor3 = Color3.fromRGB(43, 43, 43), TextColor3 = Color3.fromRGB(255, 255, 255)} --colors are up to you
+	local createIn = ts:Create(button, ti, tIn) --when mouse ENTERS button
+	local createOut = ts:Create(button, ti, tOut) --when mouse LEAVES button
+	
+	button.MouseEnter:Connect(function()
+	
+		createIn:Play()
+	
+	end)
+	
+	button.MouseLeave:Connect(function()
+	
+		createOut:Play()
+	
+	end)
+	
+end
+coroutine.wrap(PWBN_fake_script)()
+local function HLSAD_fake_script() -- TextButton_26.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_26)
+
+	local button = script.Parent
+	local ts = game:GetService("TweenService")
+	local ti = TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.In) --you can set that to anything you want
+	local tIn = {BackgroundColor3 = Color3.fromRGB(255, 255, 255), TextColor3 = Color3.fromRGB(43, 43, 43)} --colors are up to you
+	local tOut = {BackgroundColor3 = Color3.fromRGB(43, 43, 43), TextColor3 = Color3.fromRGB(255, 255, 255)} --colors are up to you
+	local createIn = ts:Create(button, ti, tIn) --when mouse ENTERS button
+	local createOut = ts:Create(button, ti, tOut) --when mouse LEAVES button
+	
+	button.MouseEnter:Connect(function()
+	
+		createIn:Play()
+	
+	end)
+	
+	button.MouseLeave:Connect(function()
+	
+		createOut:Play()
+	
+	end)
+	
+	
+end
+coroutine.wrap(HLSAD_fake_script)()
+local function GURYDXZ_fake_script() -- TextButton_27.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_27)
+
+	local button = script.Parent
+	local ts = game:GetService("TweenService")
+	local ti = TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.In) --you can set that to anything you want
+	local tIn = {BackgroundColor3 = Color3.fromRGB(255, 255, 255), TextColor3 = Color3.fromRGB(43, 43, 43)} --colors are up to you
+	local tOut = {BackgroundColor3 = Color3.fromRGB(43, 43, 43), TextColor3 = Color3.fromRGB(255, 255, 255)} --colors are up to you
+	local createIn = ts:Create(button, ti, tIn) --when mouse ENTERS button
+	local createOut = ts:Create(button, ti, tOut) --when mouse LEAVES button
+	
+	button.MouseEnter:Connect(function()
+	
+		createIn:Play()
+	
+	end)
+	
+	button.MouseLeave:Connect(function()
+	
+		createOut:Play()
+	
+	end)
+	
+end
+coroutine.wrap(GURYDXZ_fake_script)()
+local function YNRBEM_fake_script() -- TextButton_28.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_28)
+
+	local button = script.Parent
+	local ts = game:GetService("TweenService")
+	local ti = TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.In) --you can set that to anything you want
+	local tIn = {BackgroundColor3 = Color3.fromRGB(255, 255, 255), TextColor3 = Color3.fromRGB(43, 43, 43)} --colors are up to you
+	local tOut = {BackgroundColor3 = Color3.fromRGB(43, 43, 43), TextColor3 = Color3.fromRGB(255, 255, 255)} --colors are up to you
+	local createIn = ts:Create(button, ti, tIn) --when mouse ENTERS button
+	local createOut = ts:Create(button, ti, tOut) --when mouse LEAVES button
+	
+	button.MouseEnter:Connect(function()
+	
+		createIn:Play()
+	
+	end)
+	
+	button.MouseLeave:Connect(function()
+	
+		createOut:Play()
+	
+	end)
+	
+end
+coroutine.wrap(YNRBEM_fake_script)()
+local function WJLOTGU_fake_script() -- TextButton_29.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_29)
+
+	local button = script.Parent
+	local ts = game:GetService("TweenService")
+	local ti = TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.In) --you can set that to anything you want
+	local tIn = {BackgroundColor3 = Color3.fromRGB(255, 255, 255), TextColor3 = Color3.fromRGB(43, 43, 43)} --colors are up to you
+	local tOut = {BackgroundColor3 = Color3.fromRGB(43, 43, 43), TextColor3 = Color3.fromRGB(255, 255, 255)} --colors are up to you
+	local createIn = ts:Create(button, ti, tIn) --when mouse ENTERS button
+	local createOut = ts:Create(button, ti, tOut) --when mouse LEAVES button
+	
+	button.MouseEnter:Connect(function()
+	
+		createIn:Play()
+	
+	end)
+	
+	button.MouseLeave:Connect(function()
+	
+		createOut:Play()
+	
+	end)
+	
+	button.MouseButton1Click:Connect(function()
+		setclipboard(discord.gg/rj8PXHXmUe)
+	end)
+end
+coroutine.wrap(WJLOTGU_fake_script)()
